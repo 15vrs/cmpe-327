@@ -15,10 +15,16 @@
 The following test data is to be used for each test case:
 ```
     test_user = User(
-    email='test_frontend@test.com',
-    name='test_frontend',
-    password=generate_password_hash('test_frontend')
-)
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        name='test ticket',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
 ```
 
 To setup for each test case, the following steps will be completed (omitted from each test case for brevity):
@@ -29,37 +35,140 @@ To setup for each test case, the following steps will be completed (omitted from
 - verify that [POST] `/login` was called with 200
 - verify that profile page is visible by checking for `#welcome-header` element in DOM
 
-## Test Case R4.1
+## Test Case R4.1a
 The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+Ticket name with special characters produces an error message.
 
-- steps
+- click on `#ticket-name` element and enter a ticket name with special characters
+- click on `#quantity` element and enter a valid quantity for test_ticket
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
+
+## Test Case R4.1b
+The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+Ticket name with leading space produces an error message.
+
+- click on `#ticket-name` element and enter a ticket name with leading space
+- click on `#quantity` element and enter a valid quantity for test_ticket
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
+
+## Test Case R4.1c
+The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+Ticket name with trailing space produces an error message.
+
+- click on `#ticket-name` element and enter a ticket name with trailing space
+- click on `#quantity` element and enter a valid quantity for test_ticket
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.2
-The name of the ticket is no longer than 60 characters
+The name of the ticket is no longer than 60 characters.
+Ticket name longer than 60 characters produces an error message.
 
-- steps
+- click on `#ticket-name` element and enter a ticket name longer than 60 characters
+- click on `#quantity` element and enter a valid quantity for test_ticket
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
 
-## Test Case R4.3
+## Test Case R4.3a
 The quantity of the tickets has to be more than 0, and less than or equal to 100.
+Ticket quantity 0 or less produces an error message.
 
-- steps
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `0`
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
 
-## Test Case R4.4
+## Test Case R4.3b
+The quantity of the tickets has to be more than 0, and less than or equal to 100.
+Ticket quantity over 100 produces an error message.
+
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `101`
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
+
+## Test Case R4.4a
 Price has to be of range [10, 100]
+Price of less than 10 produces an error message.
 
-- steps
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `0`
+- click on `#price` element and enter value `9`
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
 
-## Test Case R4.5
+## Test Case R4.b
+Price has to be of range [10, 100]
+Price of greater than 100 produces an error message.
+
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `0`
+- click on `#price` element and enter value `101`
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
+
+## Test Case R4.5a
 Date must be given in the format YYYYMMDD (e.g. 20200901).
+Misformatted date produces error message.
 
-- steps
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `0`
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter date in DDMMYYY format
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
 
-## Test Case R4.16
+## Test Case R4.5b
+Date must be given in the format YYYYMMDD (e.g. 20200901).
+Date in the past produces error message
+
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter value `0`
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter yesterday's date
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 400 response
+- verify profile page displays error message by checking content of `#message`
+
+
+## Test Case R4.6
 For any errors, redirect back to / and show an error message.
 
-- steps
+This is checked in cases R4.1-R4.5
 
-## Test Case R4.17
+## Test Case R4.7
 The added new ticket information will be posted on the user profile page.
 
-- steps
+- click on `#ticket-name` element and enter a valid ticket name for test_ticket
+- click on `#quantity` element and enter a valid quantity for test_ticket
+- click on `#price` element and enter a valid price for test_ticket
+- click on `#date` element and enter a valid date for test_ticket
+- click on `#ticket-submit` to submit the form 
+- verify that [POST] `/sell` was called with 200
+- verify that user is navigated to `/` profile page
+- verify that profile page displays test_ticket information
