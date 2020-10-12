@@ -37,21 +37,21 @@ The following test data is to be used for each test case:
 ```
 
 ## Test Case R1.1
-If the user hasn't logged in, show the login page. 
+**If the user hasn't logged in, show the login page.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
 - verify that login page is visible by checking expected elements (eg. `form-group`) in DOM
 
 ## Test Case R1.2
-The login page has a message that by default says 'please login'.
+**The login page has a message that by default says 'please login'.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
 - verify that 'please login' is visible by checking for the `#message' element in DOM
 
 ## Test Case R1.3
-If the user has logged in, redirect to the user profile page.
+**If the user has logged in, redirect to the user profile page.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
@@ -63,7 +63,7 @@ If the user has logged in, redirect to the user profile page.
 - verify that profile page is visible by checking for `#welcome-header` element in DOM
 
 ## Test Case R1.4
-The login page provides a login form which requests two fields: email and passwords
+**The login page provides a login form which requests two fields: email and passwords.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
@@ -71,7 +71,7 @@ The login page provides a login form which requests two fields: email and passwo
 - verify that `#email` and `#password` elements exist in the DOM
 
 ## Test Case R1.5
-The login form can be submitted as a POST request to the current URL.
+**The login form can be submitted as a POST request to the current URL.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
@@ -81,7 +81,7 @@ The login form can be submitted as a POST request to the current URL.
 - verify that [POST] `/login` was called with 200
 
 ## Test Case R1.6a
-Email and password both cannot be empty.
+**Email and password both cannot be empty.**  
 Empty email and password does not login.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -90,7 +90,7 @@ Empty email and password does not login.
 - verify that login page is still visible and [POST] `/login` was not called
 
 ## Test Case R1.6b
-Email and password both cannot be empty
+**Email and password both cannot be empty.**  
 Empty email does not login.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -100,7 +100,7 @@ Empty email does not login.
 - verify that login page is still visible and [POST] `/login` was not called
 
 ## Test Case R1.6c
-Email and password both cannot be empty
+**Email and password both cannot be empty.**  
 Empty password does not login.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -110,7 +110,7 @@ Empty password does not login.
 - verify that login page is still visible and [POST] `/login` was not called
 
 ## Test Case R1.7a
-Email has to follow addr-spec defined in RFC 5322.
+**Email has to follow addr-spec defined in RFC 5322.**  
 Valid email can login.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -121,7 +121,7 @@ Valid email can login.
 - verify that [POST] `/login` was called with 200
 
 ## Test Case R1.7b
-Email has to follow addr-spec defined in RFC 5322
+**Email has to follow addr-spec defined in RFC 5322.**  
 Invalid email cannot login and error message is displayed.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -133,7 +133,7 @@ Invalid email cannot login and error message is displayed.
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.8a
-Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.
+**Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.**  
 User with password shorter than 6 characters cannot log in and error message is displayed.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -145,7 +145,7 @@ User with password shorter than 6 characters cannot log in and error message is 
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.8b
-Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.
+**Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.**  
 User with password with no uppercase characters cannot log in and error message is displayed.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -157,7 +157,7 @@ User with password with no uppercase characters cannot log in and error message 
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.8c
-Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.
+**Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.**  
 User with password with no lowercase characters cannot log in and error message is displayed.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -169,7 +169,7 @@ User with password with no lowercase characters cannot log in and error message 
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.8d
-Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.
+**Password has to meet the required complexity: minimum length 6, at least one upper case, at least one lower case, and at least one special character.**  
 User with password with no special characters cannot log in and error message is displayed.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -181,11 +181,11 @@ User with password with no special characters cannot log in and error message is
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.9
-For any formatting errors, render the login page and show the message 'email/password format is incorrect'.
+**For any formatting errors, render the login page and show the message 'email/password format is incorrect'.**  
 This is tested in cases R1.6-R1.8.
 
 ## Test Case R1.10
-If email/password are correct, redirect to `/`.
+**If email/password are correct, redirect to `/`.**
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
@@ -197,7 +197,7 @@ If email/password are correct, redirect to `/`.
 - verify that profile page is visible by checking for `#welcome-header` element in DOM
 
 ## Test Case R1.11a
-Otherwise, redirect to `/login` and show message 'email/password combination incorrect'
+**Otherwise, redirect to `/login` and show message 'email/password combination incorrect'.**  
 Invalid email redirects to `/login` with error message.
 
 - navigate to `/logout` to invalidate any existing sessions
@@ -209,7 +209,8 @@ Invalid email redirects to `/login` with error message.
 - verify login page displays error message by checking content of `#message`
 
 ## Test Case R1.11b
-Otherwise, redirect to `/login` and show message 'email/password combination incorrect'
+**Otherwise, redirect to `/login` and show message 'email/password combination incorrect'.**  
+
 Invalid password redirects to `/login` with error message.
 
 - navigate to `/logout` to invalidate any existing sessions

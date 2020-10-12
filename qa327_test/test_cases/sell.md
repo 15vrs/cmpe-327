@@ -45,7 +45,7 @@ To setup for each test case, the following steps will be completed (omitted from
 - verify that profile page is visible by checking for `#welcome-header` element in DOM
 
 ## Test Case R4.1a
-The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+**The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with special characters produces an error message.
 
 - click on `#ticket-name` element and enter a ticket name with special characters
@@ -57,7 +57,7 @@ Ticket name with special characters produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.1b
-The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+**The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with leading space produces an error message.
 
 - click on `#ticket-name` element and enter a ticket name with leading space
@@ -69,7 +69,7 @@ Ticket name with leading space produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.1c
-The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.
+**The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with trailing space produces an error message.
 
 - click on `#ticket-name` element and enter a ticket name with trailing space
@@ -81,7 +81,7 @@ Ticket name with trailing space produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.2
-The name of the ticket is no longer than 60 characters.
+**The name of the ticket is no longer than 60 characters.**  
 Ticket name longer than 60 characters produces an error message.
 
 - click on `#ticket-name` element and enter a ticket name longer than 60 characters
@@ -93,7 +93,7 @@ Ticket name longer than 60 characters produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.3a
-The quantity of the tickets has to be more than 0, and less than or equal to 100.
+**The quantity of the tickets has to be more than 0, and less than or equal to 100.**  
 Ticket quantity of 0 or less produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -105,7 +105,7 @@ Ticket quantity of 0 or less produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.3b
-The quantity of the tickets has to be more than 0, and less than or equal to 100.
+**The quantity of the tickets has to be more than 0, and less than or equal to 100.**  
 Ticket quantity of over 100 produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -117,7 +117,7 @@ Ticket quantity of over 100 produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.4a
-Price has to be of range [10, 100]
+**Price has to be of range [10, 100].**  
 Price of less than 10 produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -129,7 +129,7 @@ Price of less than 10 produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.b
-Price has to be of range [10, 100]
+**Price has to be of range [10, 100].**  
 Price of greater than 100 produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -141,7 +141,7 @@ Price of greater than 100 produces an error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.5a
-Date must be given in the format YYYYMMDD (e.g. 20200901).
+**Date must be given in the format YYYYMMDD (e.g. 20200901).**  
 Mis-formatted date produces error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -153,7 +153,7 @@ Mis-formatted date produces error message.
 - verify profile page displays error message by checking content of `#message`
 
 ## Test Case R4.5b
-Date must be given in the format YYYYMMDD (e.g. 20200901).
+**Date must be given in the format YYYYMMDD (e.g. 20200901).**  
 Date in the past produces error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
@@ -166,12 +166,12 @@ Date in the past produces error message.
 
 
 ## Test Case R4.6
-For any errors, redirect back to / and show an error message.
+**For any errors, redirect back to / and show an error message.**  
 
 This is checked in cases R4.1-R4.5
 
 ## Test Case R4.7
-The added new ticket information will be posted on the user profile page.
+**The added new ticket information will be posted on the user profile page.**
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
 - click on `#quantity` element and enter a valid quantity for test_ticket
