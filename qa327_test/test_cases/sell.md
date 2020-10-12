@@ -3,10 +3,19 @@
 | Test Case ID | Target Spec | Purpose  |
 |--------------|-------------|----------|
 | R4.1  | [POST] `/sell`  | The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character  |
+| R4.1a  | [POST] `/sell`  | Ticket name with special characters produces an error message.  |
+| R4.1b  | [POST] `/sell`  | Ticket name with leading space produces an error message.  |
+| R4.1c  | [POST] `/sell`  | Ticket name with trailing space produces an error message.  |
 | R4.2  | [POST] `/sell`  | The name of the ticket is no longer than 60 characters  |
 | R4.3  | [POST] `/sell`  | The quantity of the tickets has to be more than 0, and less than or equal to 100  |
+| R4.3a  | [POST] `/sell`  | Ticket quantity of 0 or less produces an error message.  |
+| R4.3b  | [POST] `/sell`  | Ticket quantity of over 100 produces an error message.  |
 | R4.4  | [POST] `/sell`  | Price has to be of range [10, 100]  |
+| R4.4a  | [POST] `/sell`  | Price of less than 10 produces an error message.  |
+| R4.4b  | [POST] `/sell`  | Price of greater than 100 produces an error message.  |
 | R4.5  | [POST] `/sell`  | Date must be given in the format YYYYMMDD (e.g. 20200901)  |
+| R4.5a  | [POST] `/sell`  | Mis-formatted date produces error message.  |
+| R4.5b  | [POST] `/sell`  | Date in the past produces error message.  |
 | R4.6  | [POST] `/sell`  | For any errors, redirect back to / and show an error message  |
 | R4.7  | [POST] `/sell`  | The added new ticket information will be posted on the user profile page  |
 
@@ -85,7 +94,7 @@ Ticket name longer than 60 characters produces an error message.
 
 ## Test Case R4.3a
 The quantity of the tickets has to be more than 0, and less than or equal to 100.
-Ticket quantity 0 or less produces an error message.
+Ticket quantity of 0 or less produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
 - click on `#quantity` element and enter value `0`
@@ -97,7 +106,7 @@ Ticket quantity 0 or less produces an error message.
 
 ## Test Case R4.3b
 The quantity of the tickets has to be more than 0, and less than or equal to 100.
-Ticket quantity over 100 produces an error message.
+Ticket quantity of over 100 produces an error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
 - click on `#quantity` element and enter value `101`
@@ -133,7 +142,7 @@ Price of greater than 100 produces an error message.
 
 ## Test Case R4.5a
 Date must be given in the format YYYYMMDD (e.g. 20200901).
-Misformatted date produces error message.
+Mis-formatted date produces error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
 - click on `#quantity` element and enter value `0`
@@ -145,7 +154,7 @@ Misformatted date produces error message.
 
 ## Test Case R4.5b
 Date must be given in the format YYYYMMDD (e.g. 20200901).
-Date in the past produces error message
+Date in the past produces error message.
 
 - click on `#ticket-name` element and enter a valid ticket name for test_ticket
 - click on `#quantity` element and enter value `0`
