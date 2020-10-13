@@ -21,10 +21,26 @@
 
 # Test Plans for `/sell`
 
-To setup for each test case, the following steps will be completed (omitted from each test case for brevity):
+To setup for each test case, the following will be completed prior to the test case actions(omitted from each test case for brevity):
+
+### Test data 
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('Password!')
+    );
+```
+
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+
+### Actions
+
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
-- enter valid email and password for test_user in `#email` and `#password` elements
+- enter valid test_user data in `#email` and `#password` elements
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 200
 - verify that profile page is visible by checking for `#welcome-header` element in DOM
@@ -35,22 +51,16 @@ Ticket name with special characters produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket!@#',
         quantity='1',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -69,22 +79,16 @@ Ticket name with leading space produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name=' test ticket',
         quantity='1',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -102,22 +106,16 @@ Ticket name with trailing space produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket ',
         quantity='1',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -136,22 +134,16 @@ Ticket name longer than 60 characters produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='0123456789012345678901234567890123456789012345678901234567890',
         quantity='1',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -170,22 +162,16 @@ Ticket quantity of 0 or less produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='0',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -204,22 +190,16 @@ Ticket quantity of over 100 produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='150',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -238,22 +218,16 @@ Price of less than 10 produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
         price='5',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -272,22 +246,16 @@ Price of greater than 100 produces an error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
         price='150',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -306,22 +274,16 @@ Mis-formatted date produces error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
         price='20',
         date='01012020',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -340,22 +302,16 @@ Date in the past produces error message.
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
         price='20',
         date='20100901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
@@ -379,22 +335,16 @@ This is checked in cases R4.1-R4.5
 
 ### Test Data:
 ```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
         price='20',
         date='20200901',
-    )
+    );
 ```
 ### Mocking:
 
-- mock backend.get_user to return a test_user instance
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
