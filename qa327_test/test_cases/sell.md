@@ -21,21 +21,6 @@
 
 # Test Plans for `/sell`
 
-The following test data is to be used for each test case:
-```
-    test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('test_frontend')
-    )
-    test_ticket = Ticket(
-        name='test ticket',
-        quantity='1',
-        price='20',
-        date='20200901',
-    )
-```
-
 To setup for each test case, the following steps will be completed (omitted from each test case for brevity):
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called with 200
@@ -48,10 +33,32 @@ To setup for each test case, the following steps will be completed (omitted from
 **The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with special characters produces an error message.
 
-- click on `#ticket-name` element and enter a ticket name with special characters
-- click on `#quantity` element and enter a valid quantity for test_ticket
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket!@#',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -60,10 +67,31 @@ Ticket name with special characters produces an error message.
 **The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with leading space produces an error message.
 
-- click on `#ticket-name` element and enter a ticket name with leading space
-- click on `#quantity` element and enter a valid quantity for test_ticket
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name=' test ticket',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -72,10 +100,32 @@ Ticket name with leading space produces an error message.
 **The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character.**  
 Ticket name with trailing space produces an error message.
 
-- click on `#ticket-name` element and enter a ticket name with trailing space
-- click on `#quantity` element and enter a valid quantity for test_ticket
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket ',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -84,10 +134,32 @@ Ticket name with trailing space produces an error message.
 **The name of the ticket is no longer than 60 characters.**  
 Ticket name longer than 60 characters produces an error message.
 
-- click on `#ticket-name` element and enter a ticket name longer than 60 characters
-- click on `#quantity` element and enter a valid quantity for test_ticket
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='0123456789012345678901234567890123456789012345678901234567890',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -96,10 +168,32 @@ Ticket name longer than 60 characters produces an error message.
 **The quantity of the tickets has to be more than 0, and less than or equal to 100.**  
 Ticket quantity of 0 or less produces an error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `0`
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='0',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -108,10 +202,32 @@ Ticket quantity of 0 or less produces an error message.
 **The quantity of the tickets has to be more than 0, and less than or equal to 100.**  
 Ticket quantity of over 100 produces an error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `101`
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='150',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -120,10 +236,32 @@ Ticket quantity of over 100 produces an error message.
 **Price has to be of range [10, 100].**  
 Price of less than 10 produces an error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `0`
-- click on `#price` element and enter value `9`
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='1',
+        price='5',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -132,10 +270,32 @@ Price of less than 10 produces an error message.
 **Price has to be of range [10, 100].**  
 Price of greater than 100 produces an error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `0`
-- click on `#price` element and enter value `101`
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='1',
+        price='150',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -144,10 +304,32 @@ Price of greater than 100 produces an error message.
 **Date must be given in the format YYYYMMDD (e.g. 20200901).**  
 Mis-formatted date produces error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `0`
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter date in DDMMYYY format
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='1',
+        price='20',
+        date='01012020',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -156,10 +338,32 @@ Mis-formatted date produces error message.
 **Date must be given in the format YYYYMMDD (e.g. 20200901).**  
 Date in the past produces error message.
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter value `0`
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter yesterday's date
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='1',
+        price='20',
+        date='20100901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -173,10 +377,32 @@ This is checked in cases R4.1-R4.5
 ## Test Case R4.7
 **The added new ticket information will be posted on the user profile page.**
 
-- click on `#ticket-name` element and enter a valid ticket name for test_ticket
-- click on `#quantity` element and enter a valid quantity for test_ticket
-- click on `#price` element and enter a valid price for test_ticket
-- click on `#date` element and enter a valid date for test_ticket
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='test_frontend',
+        password=generate_password_hash('test_frontend')
+    )
+    test_ticket = Ticket(
+        owner='test_frontend@test.com',
+        name='test ticket',
+        quantity='1',
+        price='20',
+        date='20200901',
+    )
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+- mock backend.get_ticket to return a test_ticket instance
+
+### Actions
+
+- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#price` element and enter `test_ticket.price`
+- click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 200
 - verify that user is navigated to `/` profile page
