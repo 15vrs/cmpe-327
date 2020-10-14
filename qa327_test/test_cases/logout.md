@@ -5,7 +5,7 @@
 | R7.1         | [POST] `/logout` | Logout will invalid the current session and redirect to the login page. After logout, the user shouldn't be able to access restricted pages. |
 | R7.1a        | [POST] `/logout` | Basic logout invalidates the current session check                                                                                           |
 | R7.1b        | [POST] `/logout` | Advanced logout invalidates the current session check                                                                                        |
-| R7.1c        | [POST] `/logout` | After logout user can't access restricted pages  
+| R7.1c        | [POST] `/logout` | After logout user can't access restricted pages                                                                                              |
 
 # Test Plans for `/logout`
 
