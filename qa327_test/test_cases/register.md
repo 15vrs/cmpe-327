@@ -83,10 +83,10 @@
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify that login page is visible by checking expected elements (eg. `form-group`) in DOM
 
@@ -99,9 +99,9 @@ Email cannot be empty
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -114,9 +114,9 @@ Password cannot be empty
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -129,9 +129,9 @@ Password2 cannot be empty
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -144,10 +144,10 @@ Email has to follow addr-spec defined in RFC 5322 (see https://en.wikipedia.org/
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
 - Enter “not.@.valid@email_address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 
 ## Test Case R2.5e
@@ -159,8 +159,8 @@ Password has to meet the required complexity: minimum length 6
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
 - Enter “$Mall” in `#password` element
 - Enter “$Mall” in `#password2` element
 - Click on `#btn-submit` element
@@ -175,8 +175,8 @@ Password has to meet the required complexity: at least one upper case
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
 - Enter “lowerc@se” in `#password` element
 - Enter “lowerc@se” in `#password2` element
 - Click on `#btn-submit` element
@@ -191,8 +191,8 @@ Password has to meet the required complexity: least one lower case
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
 - Enter “UPPERC@SE” in `#password` element
 - Enter “UPPERC@SE” in `#password2` element
 - Click on `#btn-submit` element
@@ -207,8 +207,8 @@ Password has to meet the required complexity: at least one special character
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
 - Enter “noSpecial” in `#password` element
 - Enter “noSpecial” in `#password2` element
 - Click on `#btn-submit` element
@@ -222,10 +222,10 @@ Password has to meet the required complexity: at least one special character
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “AlsoValidP@ssword” in `#password2` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a different valid password (e.g. “AlsoValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -238,9 +238,9 @@ Username has to be non-empty.
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -254,9 +254,9 @@ Username has to be alphanumeric-only.
 - Navigate to /login
 - Navigate to /register
 - Enter “#alphanumer” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -270,9 +270,9 @@ Username is not allowed if the first character is space.
 - Navigate to /login
 - Navigate to /register
 - Enter “ firstchar” `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -286,9 +286,9 @@ Username is not allowed if the last character is space.
 - Navigate to /login
 - Navigate to /register
 - Enter “lastchara ” `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -302,9 +302,9 @@ Username has to be longer than 2 characters.
 - Navigate to /login
 - Navigate to /register
 - Enter “2C” `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -318,9 +318,9 @@ Username has to be less than 20 characters.
 - Navigate to /login
 - Navigate to /register
 - Enter “twentycharacterslong” `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays error message by checking content of `#message`
 
@@ -349,10 +349,10 @@ This is checked in cases R2.5 – R2.8
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
 - Enter `test_user.email` in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
 - Verify current page displays email in use message by checking content of `#message`
 
@@ -364,12 +364,12 @@ This is checked in cases R2.5 – R2.8
 - Navigate to /logout (Invalidate any logged-in sessions)
 - Navigate to /login
 - Navigate to /register
-- Enter “Valid Username” in `#username` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
-- Enter “ValidP@ssword” in `#password2` element
+- Enter a valid username (e.g. “Valid Username”) in `#username` element
+- Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
+- Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
 - Click on `#btn-submit` element
-- Enter “valid.email@address.com” in `#email` element
-- Enter “ValidP@ssword” in `#password` element
+- Enter the same valid email address (e.g. “valid.email@address.com”) in `#email` element
+- Enter the same valid password (e.g. “ValidP@ssword”) in `#password` element
 - Click on `#btn-submit` element
 - Verify current page displays balance at 5000 by checking content of `#balance_message`
