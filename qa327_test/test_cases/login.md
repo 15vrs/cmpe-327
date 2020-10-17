@@ -113,9 +113,9 @@ Empty email and password does not login.
 ### Test Data:
 ```
     test_user = User(
-        email='test_frontend@test.com',
+        email='',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('')
     );
 ```
 ### Mocking:
@@ -136,7 +136,7 @@ Empty email does not login.
 ### Test Data:
 ```
     test_user = User(
-        email='test_frontend@test.com',
+        email='',
         name='test_frontend',
         password=generate_password_hash('Password!')
     );
@@ -162,7 +162,7 @@ Empty password does not login.
     test_user = User(
         email='test_frontend@test.com',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('')
     );
 ```
 ### Mocking:
@@ -209,7 +209,7 @@ Invalid email cannot login and error message 'email/password format is incorrect
 ### Test Data:
 ```
     test_user = User(
-        email='test_frontend@test.com',
+        email='test_frontend',
         name='test_frontend',
         password=generate_password_hash('Password!')
     );
@@ -222,7 +222,7 @@ Invalid email cannot login and error message 'email/password format is incorrect
 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
-- click on `#email` element and enter `test_frontend`
+- click on `#email` element and enter `test_user.email`
 - click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 400
@@ -237,7 +237,7 @@ User with password shorter than 6 characters cannot log in and error message 'em
     test_user = User(
         email='test_frontend@test.com',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('Pass!')
     );
 ```
 ### Mocking:
@@ -249,7 +249,7 @@ User with password shorter than 6 characters cannot log in and error message 'em
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
 - click on `#email` element and enter `test_user.email`
-- click on `#password` element and enter `Pass!`
+- click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 400
 - verify login page displays error message by checking content of `#message`
@@ -263,7 +263,7 @@ User with password with no uppercase characters cannot log in and error message 
     test_user = User(
         email='test_frontend@test.com',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('password!')
     );
 ```
 ### Mocking:
@@ -275,7 +275,7 @@ User with password with no uppercase characters cannot log in and error message 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
 - click on `#email` element and enter `test_user.email`
-- click on `#password` element and enter `password!`
+- click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 400
 - verify login page displays error message by checking content of `#message`
@@ -289,7 +289,7 @@ User with password with no lowercase characters cannot log in and error message 
     test_user = User(
         email='test_frontend@test.com',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('PASSWORD!')
     );
 ```
 ### Mocking:
@@ -301,7 +301,7 @@ User with password with no lowercase characters cannot log in and error message 
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
 - click on `#email` element and enter `test_user.email`
-- click on `#password` element and enter `PASSWORD!`
+- click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 400
 - verify login page displays error message by checking content of `#message`
@@ -315,7 +315,7 @@ User with password with no special characters cannot log in and error message 'e
     test_user = User(
         email='test_frontend@test.com',
         name='test_frontend',
-        password=generate_password_hash('Password!')
+        password=generate_password_hash('Password')
     );
 ```
 ### Mocking:
@@ -327,7 +327,7 @@ User with password with no special characters cannot log in and error message 'e
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
 - click on `#email` element and enter `test_user.email`
-- click on `#password` element and enter `Password`
+- click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 400
 - verify login page displays error message by checking content of `#message`
@@ -369,33 +369,7 @@ Invalid email redirects to `/login` with error message.
 ### Test Data:
 ```
     test_user = User(
-        email='test_frontend@test.com',
-        name='test_frontend',
-        password=generate_password_hash('Password!')
-    );
-```
-### Mocking:
-
-- mock backend.get_user to return a test_user instance
-
-### Actions
-
-- navigate to `/logout` to invalidate any existing sessions
-- navigate to `/login` and verify that [GET] `/login` was called
-- click on `#email` element and enter `test_frontend1@test.com`
-- click on `#password` element and enter `test_user.password`
-- click on `#btn-submit` element to login
-- verify that [POST] `/login` was called with 401
-- verify login page displays error message by checking content of `#message`
-
-## Test Case R1.11b
-**Otherwise, redirect to `/login` and show message 'email/password combination incorrect'.**  
-Invalid password redirects to `/login` with error message.
-
-### Test Data:
-```
-    test_user = User(
-        email='test_frontend@test.com',
+        email='test_frontend',
         name='test_frontend',
         password=generate_password_hash('Password!')
     );
@@ -409,7 +383,33 @@ Invalid password redirects to `/login` with error message.
 - navigate to `/logout` to invalidate any existing sessions
 - navigate to `/login` and verify that [GET] `/login` was called
 - click on `#email` element and enter `test_user.email`
-- click on `#password` element and enter `wrong-password`
+- click on `#password` element and enter `test_user.password`
+- click on `#btn-submit` element to login
+- verify that [POST] `/login` was called with 401
+- verify login page displays error message by checking content of `#message`
+
+## Test Case R1.11b
+**Otherwise, redirect to `/login` and show message 'email/password combination incorrect'.**  
+Invalid password redirects to `/login` with error message.
+
+### Test Data:
+```
+    test_user = User(
+        email='test_frontend@test.com',
+        name='wrong-password',
+        password=generate_password_hash('Password!')
+    );
+```
+### Mocking:
+
+- mock backend.get_user to return a test_user instance
+
+### Actions
+
+- navigate to `/logout` to invalidate any existing sessions
+- navigate to `/login` and verify that [GET] `/login` was called
+- click on `#email` element and enter `test_user.email`
+- click on `#password` element and enter `test_user.password`
 - click on `#btn-submit` element to login
 - verify that [POST] `/login` was called with 401
 - verify login page displays error message by checking content of `#message`
