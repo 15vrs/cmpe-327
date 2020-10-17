@@ -53,7 +53,7 @@ Ticket name with special characters produces an error message.
 ```
     test_ticket = Ticket(
         owner='test_frontend@test.com',
-        name='test ticket!@#',
+        name='test ticket',
         quantity='1',
         price='20',
         date='20200901',
@@ -65,7 +65,7 @@ Ticket name with special characters produces an error message.
 
 ### Actions
 
-- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#ticket-name` element and enter `test ticket !@#`
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
@@ -81,7 +81,7 @@ Ticket name with leading space produces an error message.
 ```
     test_ticket = Ticket(
         owner='test_frontend@test.com',
-        name=' test ticket',
+        name='test ticket',
         quantity='1',
         price='20',
         date='20200901',
@@ -92,7 +92,7 @@ Ticket name with leading space produces an error message.
 - mock backend.get_ticket to return a test_ticket instance
 
 ### Actions
-- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#ticket-name` element and enter ` test ticket`
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
@@ -108,7 +108,7 @@ Ticket name with trailing space produces an error message.
 ```
     test_ticket = Ticket(
         owner='test_frontend@test.com',
-        name='test ticket ',
+        name='test ticket',
         quantity='1',
         price='20',
         date='20200901',
@@ -120,7 +120,7 @@ Ticket name with trailing space produces an error message.
 
 ### Actions
 
-- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#ticket-name` element and enter `test ticket `
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
@@ -136,7 +136,7 @@ Ticket name longer than 60 characters produces an error message.
 ```
     test_ticket = Ticket(
         owner='test_frontend@test.com',
-        name='0123456789012345678901234567890123456789012345678901234567890',
+        name='test ticket',
         quantity='1',
         price='20',
         date='20200901',
@@ -148,7 +148,7 @@ Ticket name longer than 60 characters produces an error message.
 
 ### Actions
 
-- click on `#ticket-name` element and enter `test_ticket.name`
+- click on `#ticket-name` element and enter `0123456789012345678901234567890123456789012345678901234567890`
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
@@ -165,7 +165,7 @@ Ticket quantity of 0 or less produces an error message.
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
-        quantity='0',
+        quantity='1',
         price='20',
         date='20200901',
     );
@@ -177,7 +177,7 @@ Ticket quantity of 0 or less produces an error message.
 ### Actions
 
 - click on `#ticket-name` element and enter `test_ticket.name`
-- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#quantity` element and enter `0`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
@@ -193,7 +193,7 @@ Ticket quantity of over 100 produces an error message.
     test_ticket = Ticket(
         owner='test_frontend@test.com',
         name='test ticket',
-        quantity='150',
+        quantity='1',
         price='20',
         date='20200901',
     );
@@ -205,7 +205,7 @@ Ticket quantity of over 100 produces an error message.
 ### Actions
 
 - click on `#ticket-name` element and enter `test_ticket.name`
-- click on `#quantity` element and enter `test_ticket.quantity`
+- click on `#quantity` element and enter `150`
 - click on `#price` element and enter `test_ticket.price`
 - click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
@@ -222,7 +222,7 @@ Price of less than 10 produces an error message.
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
-        price='5',
+        price='10',
         date='20200901',
     );
 ```
@@ -234,7 +234,7 @@ Price of less than 10 produces an error message.
 
 - click on `#ticket-name` element and enter `test_ticket.name`
 - click on `#quantity` element and enter `test_ticket.quantity`
-- click on `#price` element and enter `test_ticket.price`
+- click on `#price` element and enter `5`
 - click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
@@ -250,7 +250,7 @@ Price of greater than 100 produces an error message.
         owner='test_frontend@test.com',
         name='test ticket',
         quantity='1',
-        price='150',
+        price='10',
         date='20200901',
     );
 ```
@@ -262,7 +262,7 @@ Price of greater than 100 produces an error message.
 
 - click on `#ticket-name` element and enter `test_ticket.name`
 - click on `#quantity` element and enter `test_ticket.quantity`
-- click on `#price` element and enter `test_ticket.price`
+- click on `#price` element and enter `150`
 - click on `#date` element and enter `test_ticket.date`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
@@ -279,7 +279,7 @@ Mis-formatted date produces error message.
         name='test ticket',
         quantity='1',
         price='20',
-        date='01012020',
+        date='20200901',
     );
 ```
 ### Mocking:
@@ -291,7 +291,7 @@ Mis-formatted date produces error message.
 - click on `#ticket-name` element and enter `test_ticket.name`
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
-- click on `#date` element and enter `test_ticket.date`
+- click on `#date` element and enter `01012020`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
@@ -307,7 +307,7 @@ Date in the past produces error message.
         name='test ticket',
         quantity='1',
         price='20',
-        date='20100901',
+        date='20200901',
     );
 ```
 ### Mocking:
@@ -319,7 +319,7 @@ Date in the past produces error message.
 - click on `#ticket-name` element and enter `test_ticket.name`
 - click on `#quantity` element and enter `test_ticket.quantity`
 - click on `#price` element and enter `test_ticket.price`
-- click on `#date` element and enter `test_ticket.date`
+- click on `#date` element and enter `20100901`
 - click on `#ticket-submit` to submit the form 
 - verify that [POST] `/sell` was called with 400 response
 - verify profile page displays error message by checking content of `#message`
