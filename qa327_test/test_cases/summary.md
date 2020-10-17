@@ -134,4 +134,4 @@ All tests are run on GitHub whenever a commit is pushed to remote.
 For each commit, the dependencies are installed and the changes are linted before all unit and integration tests are run.
 
 **How are you going to organize different test case code files? (a folder for a specification?)**  
-In a similar vain to what we did for the test cases’ documentation, the test case code files will be stored in separate folders for each page/route.
+In a similar vein to what we did for the test cases’ documentation, the test case code files will be stored in separate folders for each page/route.
