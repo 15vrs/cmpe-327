@@ -1,4 +1,4 @@
-# Test Cases for `/login`
+# Test Cases for `/`
 
 | Test Case ID | Target Spec | Purpose  |
 |--------------|-------------|----------|
@@ -47,6 +47,7 @@ test_user = User(
 - verify that login page is visible by checking expected elements (eg. `form-group`) in DOM
 - verify that user is navigated to `/`
 - verify that `/` shows header `'Hi test_frontend'`
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.3
 **This page shows user balance.**  
@@ -74,6 +75,7 @@ test_user = User(
 - open `/`
 - verify that user is navigated to `/`
 - verify that `/` shows the users balance `'Balance: 30'`
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.4
 **This page shows a logout link, pointing to /logout.**  
@@ -101,6 +103,7 @@ test_user = User(
 - open `/`
 - verify that user is navigated to `/`
 - verify that `/` shows a logout link `'logout'` pointing to `/logout`
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.5
 **This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired.**  
@@ -137,7 +140,9 @@ test_ticket = Ticket(
 - click on `#btn-submit` element to login
 - open `/`
 - verify that user is navigated to `/`
-- verify that `/`shows a list of all available tickets that aren't expired
+- verify that `/` shows a list of all available tickets in the database that are not expired
+- verify that the information displayed is accurate by checking the quantity, owner's email, and price are all accurate
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.6
 **This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date.**  
@@ -174,7 +179,8 @@ test_ticket = Ticket(
 - click on `#btn-submit` element to login
 - open `/`
 - verify that user is navigated to `/`
-- verify that `/` shows a form to submit new tickets for sell with fields `#ticket-name`, `#quantity`, `#price`, `#date`
+- verify that `/` shows a form to submit new tickets for sell with fields `#sell-name`, `#sell-quantity`, `#sell-price`, `#sell-date`
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.7
 **This page contains a form that a user can buy new tickets. Fields: name, quantity.**  
@@ -211,7 +217,8 @@ test_ticket = Ticket(
 - click on `#btn-submit` element to login
 - open `/`
 - verify that user is navigated to `/`
-- verify that `/` shows a form to buy new tickets with fields `#ticket-name`, `#quantity`
+- verify that `/` shows a form to buy new tickets with fields `#sell-name`, `#sell-quantity`
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.8
 **The ticket-selling form can be posted to /sell.**  
@@ -248,11 +255,13 @@ test_ticket = Ticket(
 - click on `#btn-submit` element to login
 - open `/`
 - verify that user is navigated to `/`
-- click on `#sell_ticket_name` and enter `test_ticket.name`
-- click on `#sell_quantity` and enter `test_ticket.quantity`
-- click on `#sell_price` and enter `test_ticket.price`
-- click on `#sell_date` and enter `test_ticket.date`
-- click on `#sell_submit` to submit the form
+- click on `#sell-name` and enter `test_ticket.name`
+- click on `#sell-quantity` and enter `test_ticket.quantity`
+- click on `#sell-price` and enter `test_ticket.price`
+- click on `#sell-date` and enter `test_ticket.date`
+- click on `#sell-submit` to submit the form
+- verify that [POST] `/sell` was called with 200
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.9
 **The ticket-buying form can be posted to /buy.**  
@@ -289,9 +298,11 @@ test_ticket = Ticket(
 - click on `#btn-submit` element to login
 - open `/`
 - verify that user is navigated to `/`
-- click on `#buy_ticket_name` and enter `test_ticket.name`
-- click on `#buy_quantity` and enter `test_ticket.quantity`
-- click on `#buy_submit` to submit the form
+- click on `#buy-ticket_name` and enter `test_ticket.name`
+- click on `#buy-quantity` and enter `test_ticket.quantity`
+- click on `#buy-submit` to submit the form
+- verify that [POST] `/buy` was called with 200
+- navigate to `/logout` (clean up)
 
 ## Test Case R3.10
 **The ticket-update form can be posted to /update.**  
@@ -333,3 +344,5 @@ test_ticket = Ticket(
 - click on `#update_price` and enter `test_ticket.price`
 - click on `#update_date` and enter `test_ticket.date`
 - click on `#update_submit` to submit the form
+- verify that [POST] `/update` was called with 200
+- navigate to `/logout` (clean up)
