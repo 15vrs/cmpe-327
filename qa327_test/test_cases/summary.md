@@ -121,11 +121,17 @@
 
 # Test Plan
 
-**How did your team organize the documentations of the test cases (e.g. where did you store the test case markdown file for each team member).**
-To organize the documentations, we created a separate markdown file for each page/route for a total of 8 different markdown files. This was done because it made finding test cases that affect the same area far easier then splitting then by group member, while also keeping the GET and POST cases that some pages have together.
+**How did your team organize the documentations of the test cases (e.g. where did you store the test case markdown file for each team member).**  
+To organize the documentations, we created a separate markdown file for each page/route for a total of 8 different markdown files. 
+This was done because it made finding test cases that affect the same area far easier then splitting then by group member, while also keeping the GET and POST cases that some pages have together.
 
-**Your understanding of how the chosen testing framework works to test the frontend, including your understandings of when and how the test cases will be running directly on GitHub.**
+**Your understanding of how the chosen testing framework works to test the frontend, including your understandings of when and how the test cases will be running directly on GitHub.**  
+To test the frontend, the backend functions are mocked using a fake test object where for a given input, some expected output is returned. 
+This allows for the frontend pages and methods to be unit tested in isolation to the backend, without using a browser. 
+In contrast, integration testing of the frontend and backend together is done against an automated browser using Selenium and a mocked backeend serer. 
+Selenium interacts with the frontend to verify the correct backend behaviour.  
+All tests are run on GitHub whenever a commit is pushed to remote. 
+For each commit, the dependencies are installed and the changes are linted before all unit and integration tests are run.
 
-
-**How are you going to organize different test case code files? (a folder for a specification?)**
+**How are you going to organize different test case code files? (a folder for a specification?)**  
 In a similar vain to what we did for the test cases’ documentation, the test case code files will be stored in separate folders for each page/route.
