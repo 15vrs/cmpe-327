@@ -1,6 +1,7 @@
 from flask import render_template, request, session, redirect
 from qa327 import app
 import qa327.backend as bn
+import re
 
 """
 This file defines the front-end part of the service.
@@ -56,25 +57,39 @@ def login_get():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    user = bn.login_user(email, password)
-    if user:
-        session['logged_in'] = user.email
-        """
-        Session is an object that contains sharing information 
-        between browser and the end server. Typically it is encrypted 
-        and stored in the browser cookies. They will be past 
-        along between every request the browser made to this services.
 
-        Here we store the user object into the session, so we can tell
-        if the client has already login in the following sessions.
+    if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
+        return render_template('login.html', message='email/password combination incorrect')
 
-        """
-        # success! go back to the home page
-        # code 303 is to force a 'GET' request
-        return redirect('/', code=303)
     else:
-        return render_template('login.html', message='login failed')
+        user = bn.login_user(email, password)
+        if user:
+            session['logged_in'] = user.email
+            """
+            Session is an object that contains sharing information 
+            between browser and the end server. Typically it is encrypted 
+            and stored in the browser cookies. They will be past 
+            along between every request the browser made to this services.
+    
+            Here we store the user object into the session, so we can tell
+            if the client has already login in the following sessions.
+    
+            """
+            # success! go back to the home page
+            # code 303 is to force a 'GET' request
+            return redirect('/', code=303)
+        else:
+            return render_template('login.html', message='login failed')
 
+def email_check(email):
+    if email != None:
+        regex = '(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
+        return re.match(regex, email)
+
+def pwd_check(password):
+    if password != None:
+        regex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{6,}$'
+        return re.match(regex, password)
 
 @app.route('/logout')
 def logout():
