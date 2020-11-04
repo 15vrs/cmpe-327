@@ -57,7 +57,7 @@ def username_check(name):
         # regex to check username is alphanumeric
         regex = '^[ ]?[a-zA-Z0-9][ ]?$'
         # check username is of required length
-        if len(name) > 2 and len(name) < 2:
+        if len(name) > 2 and len(name) < 20:
             return re.match(regex, name)
 
 @app.route('/login', methods=['GET'])
