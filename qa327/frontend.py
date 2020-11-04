@@ -83,11 +83,14 @@ def login_post():
 
 def email_check(email):
     if email != None:
+        # regex to check email conforms to RFC-5322
         regex = '(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
         return re.match(regex, email)
 
 def pwd_check(password):
     if password != None:
+        # regex to check pwd conforms to minimum length 6,
+        # at least an upper case, a lower case, and a special characters
         regex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{6,}$'
         return re.match(regex, password)
 
