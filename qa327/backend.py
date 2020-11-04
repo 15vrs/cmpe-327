@@ -50,6 +50,15 @@ def register_user(email, name, password, password2):
     return None
 
 def set_ticket(owner, name, quantity, price, date):
+    """
+    Register a ticket to the database
+    :param owner: the email of the ticket seller
+    :param name: the name of the ticket
+    :param quantity: the quantity of tickets being sold
+    :param price: the price of each ticket being sold
+    :param date: the date the tickets expire
+    :return: an error message if there is any, or None if register succeeds
+    """
     new_ticket = Ticket(owner=owner, name=name, quantity=quantity, price=price, date=date)
 
     db.session.add(new_ticket)
@@ -58,5 +67,9 @@ def set_ticket(owner, name, quantity, price, date):
 
 
 def get_all_tickets():
+    """
+    Gets all the tickets in the database that havent expired
+    :return: a list of Tickets that havent expired
+    """
     tik = Ticket.query.filter(Ticket.date > int(date.today().strftime('%Y%m%d'))).all()
     return tik
