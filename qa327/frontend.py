@@ -13,11 +13,12 @@ The html templates are stored in the 'templates' folder.
 
 @app.route('/register', methods=['GET'])
 def register_get():
-    # templates are stored in the templates folder
+    # if already logged in, redirect to profile page
     if 'logged_in' in session:
 	    return redirect('/')
     else:
-	    return render_template('register.html', message='')
+	# templates are stored in the templates folder
+        return render_template('register.html', message='')
 
 
 @app.route('/register', methods=['POST'])
@@ -35,7 +36,7 @@ def register_post():
     elif (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
         error_message = 'Email/Password combination incorrect'
 
-    elif username_check(name) is None:
+    elif username_check(name) is None: #no match in regex
         error_message = "Username format error"
 
     else:
@@ -53,7 +54,9 @@ def register_post():
 
 def username_check(name):
     if name != None:
+        # regex to check username is alphanumeric
         regex = '^[ ]?[a-zA-Z0-9][ ]?$'
+        # check username is of required length
         if len(name) > 2 and len(name) < 2:
             return re.match(regex, name)
 
