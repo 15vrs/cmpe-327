@@ -55,7 +55,7 @@ def register_post():
 def username_check(name):
     if name != None:
         # regex to check username is alphanumeric
-        regex = '^[ ]?[a-zA-Z0-9][ ]?$'
+        regex = '^[ ]?[a-zA-Z0-9]+[ ]?$'
         # check username is of required length
         if len(name) > 2 and len(name) < 20:
             return re.match(regex, name)
