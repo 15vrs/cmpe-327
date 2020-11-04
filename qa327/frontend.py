@@ -14,7 +14,10 @@ The html templates are stored in the 'templates' folder.
 @app.route('/register', methods=['GET'])
 def register_get():
     # templates are stored in the templates folder
-    return render_template('register.html', message='')
+    if 'logged_in' in session:
+	    return redirect('/')
+    else:
+	    return render_template('register.html', message='')
 
 
 @app.route('/register', methods=['POST'])
@@ -29,24 +32,30 @@ def register_post():
     if password != password2:
         error_message = "The passwords do not match"
 
-    elif len(email) < 1:
-        error_message = "Email format error"
+    elif (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
+        error_message = 'Email/Password combination incorrect'
 
-    elif len(password) < 1:
-        error_message = "Password not strong enough"
+    elif username_check(name) is None:
+        error_message = "Username format error"
+
     else:
         user = bn.get_user(email)
         if user:
             error_message = "User exists"
-        elif not bn.register_user(email, name, password, password2):
-            error_message = "Failed to store user info."
+        else:
+            error_message = bn.register_user(email, name, password, password2)
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
     if error_message:
-        return render_template('register.html', message=error_message)
+        return render_template('login.html', message=error_message)
     else:
         return redirect('/login')
 
+def username_check(name):
+    if name != None:
+        regex = '^[ ]?[a-zA-Z0-9][ ]?$'
+        if len(name) > 2 and len(name) < 2:
+            return re.match(regex, name)
 
 @app.route('/login', methods=['GET'])
 def login_get():
