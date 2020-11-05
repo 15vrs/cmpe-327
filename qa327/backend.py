@@ -1,5 +1,6 @@
-from qa327.models import db, User
+from qa327.models import db, User, Ticket
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import date
 
 """
 This file defines all backend logic that interacts with database and other services
@@ -42,12 +43,33 @@ def register_user(email, name, password, password2):
 
     hashed_pw = generate_password_hash(password, method='sha256')
     # store the encrypted password rather than the plain password
-    new_user = User(email=email, name=name, password=hashed_pw)
+    new_user = User(email=email, name=name, password=hashed_pw, balance=0)
 
     db.session.add(new_user)
     db.session.commit()
     return None
 
+def set_ticket(owner, name, quantity, price, date):
+    """
+    Register a ticket to the database
+    :param owner: the email of the ticket seller
+    :param name: the name of the ticket
+    :param quantity: the quantity of tickets being sold
+    :param price: the price of each ticket being sold
+    :param date: the date the tickets expire
+    :return: an error message if there is any, or None if register succeeds
+    """
+    new_ticket = Ticket(owner=owner, name=name, quantity=quantity, price=price, date=date)
+
+    db.session.add(new_ticket)
+    db.session.commit()
+    return None
+
 
 def get_all_tickets():
-    return []
+    """
+    Gets all the tickets in the database that havent expired
+    :return: a list of Tickets that havent expired
+    """
+    tik = Ticket.query.filter(Ticket.date > int(date.today().strftime('%Y%m%d'))).all()
+    return tik
