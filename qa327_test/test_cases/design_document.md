@@ -2,21 +2,27 @@
 
 ## Architecture
 
-| Classes | Description  |
-|---------|--------------|
-|   |   |
-|   |   |
-|   |   |
+| Classes          | Description                                        |
+|------------------|----------------------------------------------------|
+| User(db.Model)   | Contains all stored information for a given user   |
+| Ticket(db.Model) | Contains all stored information for a given ticket |
 
-| Methods  | Description  |
-|---------|--------------|
-| login_get()  | renders login page with a login message  |
-| login_post()  | attempts to login with an email and password  |
-| email_check(email) | verifies format of email passed in |
-| pwd_check(password)  | verifies format of password passed in  |
-|   |   |
-|   |   |
-|   |   |
+| Layer    | Methods                                         | Description                                                           |
+|----------|-------------------------------------------------|-----------------------------------------------------------------------|
+| Frontend | register_get()                                  | Renders register page if not logged in                                |
+| Frontend | register_post()                                 | Attempts to register with supplied new user information               |
+| Frontend | login_get()                                     | Renders login page with a login message                               |
+| Frontend | login_post()                                    | Attempts to login with an email and password                          |
+| Frontend | authenticate(inner_function)                    | Wrapper, authenticates user before allowing access to other functions |
+| Frontend | profile(user)                                   | Renders user’s profile page and tickets menu                          |
+| Frontend | email_check(email)                              | Verifies format of email passed in                                    |
+| Frontend | pwd_check(password)                             | Verifies format of password passed in                                 |
+| Frontend | username_check(name)                            | Verifies format of username passed in                                 |
+| Backend  | get_user(email)                                 | Attempt to return user based on supplied email                        |
+| Backend  | login_user(email, password)                     | Attempt to authenticate user’s login                                  |
+| Backend  | register_user(email, name, password, password2) | Attempt to register new user to the database                          |
+| Backend  | get_all_tickets()                               | Return all non-expired tickets from database                          |
+| Backend  | set_ticket(owner, name, quantity, price, date)  | Attempt to register a new ticket to the database                      |
 
 ## Test Plan
 
