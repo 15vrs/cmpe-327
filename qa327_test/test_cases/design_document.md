@@ -33,3 +33,10 @@ points to cover:
 - Environments (all the local environment and the cloud environment) for the testing.
 - Responsibility (who is responsible for which test case, and in case of failure, who should you contact)
 - Budget Management (you have limited CI action minutes, how to monitor, keep track and minimize unncessary cost)
+
+- The methods listed above will be tested at the unit test level using multiple inputs and verifying the output.
+- The frontend and backend components will be integration tested using Selenium.
+- Tests will be run locally as they are written, and must be passing on GitHub Actions before merging to master. 
+- The priority of tests is unit tests first, then integration tests when run both locally and on GitHub Actions. 
+- The developer that wrote the test cases in A1 will be responsible for writing and maintaining test cases.
+- Budget?
