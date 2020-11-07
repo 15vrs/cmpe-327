@@ -30,6 +30,8 @@
 
 - The frontend and backend unit tests will be located under the `/qa327_test/frontend` and `/qa327_test/backend` folders.
 - The integration tests are located under the `/qa327_test/integration` folder.
+- Each unit test will have it's own python test file to work best with Pytest
+- Example: in `/qa327_test/frontend` would be `test_register` which has all the tests for the `/register` methods
 
 **The order to the test cases (which level first which level second).**
 
