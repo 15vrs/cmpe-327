@@ -35,7 +35,10 @@
 
 **The order to the test cases (which level first which level second).**
 
-- The priority of tests is unit tests first, if everything passes then integration tests ran locally then tested on GitHub Actions.
+- First Level: Individual method testing done locally and manually
+- Second Level: Unit testing (frontend and backend) done locally, automated via Pytest
+- Third Level: Integration testing done locally, automated via Pytest
+- Fourth Level: Full system testing done via Github Actions
 
 **Techniques and tools used for testing.**
 
