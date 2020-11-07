@@ -26,17 +26,45 @@
 
 ## Test Plan
 
-points to cover:
-- How test cases of different levels (frontend, backend units, integration) are organized.
-- The order ot the test cases (which level first which level second).
-- Techniques and tools used for testing.
-- Environments (all the local environment and the cloud environment) for the testing.
-- Responsibility (who is responsible for which test case, and in case of failure, who should you contact)
-- Budget Management (you have limited CI action minutes, how to monitor, keep track and minimize unncessary cost)
+**How test cases of different levels (frontend, backend units, integration) are organized.**
 
-- The methods listed above will be tested at the unit test level using multiple inputs and verifying the output.
+- `???`
+
+**The order to the test cases (which level first which level second).**
+
+- The priority of tests is unit tests first, if everything passes then integration tests ran locally then tested on GitHub Actions.
+
+**Techniques and tools used for testing.**
+
 - The frontend and backend components will be integration tested using Selenium.
-- Tests will be run locally as they are written, and must be passing on GitHub Actions before merging to master. 
-- The priority of tests is unit tests first, then integration tests when run both locally and on GitHub Actions. 
+- Tests will be run locally as they are written, and must be passing on GitHub Actions before merging to master.
+- The methods listed above will be tested at the unit test level using multiple inputs and verifying the output.
+
+**Environments (all the local environment and the cloud environment) for the testing.**
+
+- The enviroment used for testing will be...
+- Windows 10 ver.2004 (local)
+- `add whatever mac/linux machine you guys are using`
+- Ubuntu 18.04 (cloud)
+- exclusively using the Chrome browser
+
+**Responsibility (who is responsible for which test case, and in case of failure, who should you contact)**
+
 - The developer that wrote the test cases in A1 will be responsible for writing and maintaining test cases.
-- Budget?
+
+| Test Case     | Contact |
+|---------------|---------|
+| R1 - /login   | Vivian  |
+| R2 - /register| Adrian  |
+| R3 - /        | Kevin   |
+| R4 - /sell    | Vivian  |
+| R5 - /update  | Adrian  |
+| R6 - /buy     | Kevin   |
+| R7 - /logout  | Adrian  |
+| R8 - /*       | Adrian  |
+
+**Budget Management (you have limited CI action minutes, how to monitor, keep track and minimize unnecessary cost)**
+
+- The repository owner can check how many action minutes are left and notify the rest of the team if there's a chance we'll hit the limit
+- To minimize the amount of unnecessary action minutes used, the entire test suite will first be run locally to ensure everything passes before being pushed to Github.
+- Can also skip running the CI if no code was changed
