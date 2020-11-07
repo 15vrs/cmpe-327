@@ -28,7 +28,8 @@
 
 **How test cases of different levels (frontend, backend units, integration) are organized.**
 
-- `???`
+- The frontend and backend unit tests will be located under the `/qa327_test/frontend` and `/qa327_test/backend` folders.
+- The integration tests are located under the `/qa327_test/integration` folder.
 
 **The order to the test cases (which level first which level second).**
 
@@ -42,9 +43,9 @@
 
 **Environments (all the local environment and the cloud environment) for the testing.**
 
-- The enviroment used for testing will be...
+- The environment used for testing will be...
 - Windows 10 ver.2004 (local)
-- `add whatever mac/linux machine you guys are using`
+- MacOS 10.15.4 (local)
 - Ubuntu 18.04 (cloud)
 - exclusively using the Chrome browser
 
@@ -65,6 +66,21 @@
 
 **Budget Management (you have limited CI action minutes, how to monitor, keep track and minimize unnecessary cost)**
 
+- GitHub can send a usage report with a summary of GitHub Actions minutes used to the repository owner. An example report for the last 30 days is below.
 - The repository owner can check how many action minutes are left and notify the rest of the team if there's a chance we'll hit the limit
 - To minimize the amount of unnecessary action minutes used, the entire test suite will first be run locally to ensure everything passes before being pushed to Github.
 - Can also skip running the CI if no code was changed
+
+| Date       | Product | Repository Slug | Quantity | Unit Type | Price Per Unit | Actions Workflow             |
+| ---------- | ------- | --------------- | -------- | --------- | -------------- | ---------------------------- |
+| 2020-10-09 | actions | 15vrs/cmpe-327  | 1        | UBUNTU    | $0.01          | .github/workflows/maven.yml  |
+| 2020-10-09 | actions | 15vrs/cmpe-327  | 14       | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-12 | actions | 15vrs/cmpe-327  | 6        | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-13 | actions | 15vrs/cmpe-327  | 6        | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-14 | actions | 15vrs/cmpe-327  | 12       | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-15 | actions | 15vrs/cmpe-327  | 4        | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-16 | actions | 15vrs/cmpe-327  | 2        | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-10-17 | actions | 15vrs/cmpe-327  | 28       | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-11-03 | actions | 15vrs/cmpe-327  | 10       | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-11-04 | actions | 15vrs/cmpe-327  | 26       | UBUNTU    | $0.01          | .github/workflows/python.yml |
+| 2020-11-06 | actions | 15vrs/cmpe-327  | 8        | UBUNTU    | $0.01          | .github/workflows/python.yml |
