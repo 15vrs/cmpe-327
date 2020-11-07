@@ -45,6 +45,7 @@
 
 - The environment used for testing will be...
 - Windows 10 ver.2004 (local)
+- Windows 10 ver.1903 (local)
 - MacOS 10.15.4 (local)
 - Ubuntu 18.04 (cloud)
 - exclusively using the Chrome browser
