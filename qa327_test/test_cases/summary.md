@@ -56,9 +56,10 @@
 | R3.5         | [GET] `/`              | This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired. |
 | R3.6         | [GET] `/`              | This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date.                                        |
 | R3.7         | [GET] `/`              | This page contains a form that a user can buy new tickets. Fields: name, quantity                                                                             |
-| R3.8         | [GET] `/`              | The ticket-selling form can be posted to /sell                                                                                                                |
-| R3.9         | [GET] `/`              | The ticket-buying form can be posted to /buy                                                                                                                  |
-| R3.10        | [GET] `/`              | The ticket-update form can be posted to /update                                                                                                               |
+| R3.8         | [GET] `/`              | This page contains a form that a user can update existing tickets. Fields: name, quantity, price, expiration date                                             |
+| R3.9         | [GET] `/`              | The ticket-selling form can be posted to /sell                                                                                                                |
+| R3.10        | [GET] `/`              | The ticket-buying form can be posted to /buy                                                                                                                  |
+| R3.11        | [GET] `/`              | The ticket-update form can be posted to /update                                                                                                               |
 | R4.1         | [POST] `/sell`         | The name of the ticket has to be alphanumeric-only, and space allowed only if it is not the first or the last character                                       |
 | R4.1a        | [POST] `/sell`         | Ticket name with special characters produces an error message.                                                                                                |
 | R4.1b        | [POST] `/sell`         | Ticket name with leading space produces an error message.                                                                                                     |
