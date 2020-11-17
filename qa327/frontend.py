@@ -30,21 +30,17 @@ def register_post():
     error_message = None
 
 
-    if password != password2:
-        error_message = "The passwords do not match"
-
-    elif (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
+    if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
         error_message = 'Email/Password combination incorrect'
+
+    elif password != password2:
+        error_message = "The passwords do not match"
 
     elif username_check(name) is None: #no match in regex
         error_message = "Username format error"
 
     else:
-        user = bn.get_user(email)
-        if user:
-            error_message = "User exists"
-        else:
-            error_message = bn.register_user(email, name, password, password2)
+        error_message = bn.register_user(email, name, password, password2)
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
     if error_message:
@@ -55,7 +51,7 @@ def register_post():
 def username_check(name):
     if name != None:
         # regex to check username is alphanumeric
-        regex = '^[ ]?[a-zA-Z0-9]+[ ]?$'
+        regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
         # check username is of required length
         if len(name) > 2 and len(name) < 20:
             return re.match(regex, name)
@@ -103,7 +99,7 @@ def pwd_check(password):
     if password != None:
         # regex to check pwd conforms to minimum length 6,
         # at least an upper case, a lower case, and a special characters
-        regex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{6,}$'
+        regex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)[A-Za-z\d\W]{6,}$'
         return re.match(regex, password)
 
 @app.route('/logout')

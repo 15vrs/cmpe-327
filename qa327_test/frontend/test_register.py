@@ -484,4 +484,4 @@ class RegisterTest(BaseCase):
         self.click('input[type="submit"]')
         # Verify current page displays balance at 5000 by checking content of `#balance_message`
         self.assert_element("#balance")
-        self.assert_text("User Balance: 5000", "#balance")
+        self.assert_text("User Balance: $5000", "#balance")

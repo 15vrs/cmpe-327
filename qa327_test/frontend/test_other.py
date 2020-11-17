@@ -10,7 +10,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
-    password=generate_password_hash('Password!')
+    password=generate_password_hash('Password!'),
+    balance=0
 )
 
 class OtherTest(BaseCase):
