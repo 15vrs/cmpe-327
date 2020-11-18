@@ -41,6 +41,11 @@ def register_post():
         error_message = "Username format error"
 
     else:
+    """
+    user = bn.get_user(email)
+    if user:
+        error_message = "User exists"
+    else:
         error_message = bn.register_user(email, name, password, password2)
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
@@ -69,29 +74,30 @@ def login_get():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-
+    """
     if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
         return render_template('login.html', message='email/password format is incorrect')
 
     else:
-        user = bn.login_user(email, password)
-        if user:
-            session['logged_in'] = user.email
-            """
-            Session is an object that contains sharing information 
-            between browser and the end server. Typically it is encrypted 
-            and stored in the browser cookies. They will be past 
-            along between every request the browser made to this services.
-    
-            Here we store the user object into the session, so we can tell
-            if the client has already login in the following sessions.
-    
-            """
-            # success! go back to the home page
-            # code 303 is to force a 'GET' request
-            return redirect('/', code=303)
-        else:
-            return render_template('login.html', message='email/password combination incorrect')
+    """
+    user = bn.login_user(email, password)
+    if user:
+        session['logged_in'] = user.email
+        """
+        Session is an object that contains sharing information 
+        between browser and the end server. Typically it is encrypted 
+        and stored in the browser cookies. They will be past 
+        along between every request the browser made to this services.
+
+        Here we store the user object into the session, so we can tell
+        if the client has already login in the following sessions.
+
+        """
+        # success! go back to the home page
+        # code 303 is to force a 'GET' request
+        return redirect('/', code=303)
+    else:
+        return render_template('login.html', message='email/password combination incorrect')
 
 def email_check(email):
     if email != None:
@@ -122,6 +128,7 @@ def sell_post():
     date = request.form.get('sell-date')
     tickets = bn.get_all_tickets()
 
+    """
     if (ticket_name_check(name) is None): #no match in regex
         error_message = 'ticket name format is incorrect'
 
@@ -135,14 +142,16 @@ def sell_post():
         error_message = "date format is incorrect"
 
     else:
-        error_message = bn.set_ticket(user, name, quantity, price, date)
+    """
+    error_message = bn.set_ticket(user, name, quantity, price, date)
+    return redirect('/', code=303) 
     # if there is any error messages when selling ticket
     # at the backend, go back to the profile page.
     if error_message:
+        #i think you have to return these
         render_template('index.html', user=user, tickets=tickets, message=error_message)
     else:
         render_template('index.html', user=user, tickets=tickets)
-
 
 def ticket_name_check(name):
     if name != None:
