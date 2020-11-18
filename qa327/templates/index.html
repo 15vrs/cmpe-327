@@ -9,6 +9,7 @@
 
 <h2 id="welcome-header">Hi {{ user.name }} !</h2>
 
+<p id="user-email" hidden>{{ user.email }}</p>
 <h2 id="balance">User Balance: ${{ user.balance }}</h2>
 
 <h2 >Here are all available tickets</h2>
@@ -21,7 +22,7 @@
 {% endfor %}
 </div>
 
-<h4 id='sell'>Sell Tickets</h4>
+<h4 id='sell-tickets'>Sell Tickets</h4>
 <form method="post">
     <div class="form-group">
       <label for="sell-name">Ticket Name</label>

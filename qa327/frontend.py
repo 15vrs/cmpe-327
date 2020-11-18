@@ -112,6 +112,54 @@ def logout():
         session.pop('logged_in', None)
     return redirect('/')
 
+@app.route('/', methods=['POST'])
+def sell_post():
+    email = request.form.get('user-email')
+    user = bn.get_user(email)
+    name = request.form.get('sell-name')
+    quantity = request.form.get('sell-quantity')
+    price = request.form.get('sell-price')
+    date = request.form.get('sell-date')
+    tickets = bn.get_all_tickets()
+
+    if (ticket_name_check(name) is None): #no match in regex
+        error_message = 'ticket name format is incorrect'
+
+    elif (quantity_check(quantity) is None): #no match in regex
+        error_message = "quantity format is incorrect"
+
+    elif (price_check(price) is None):  # no match in regex
+        error_message = "price format is incorrect"
+
+    elif (date_check(date) is None): #no match in regex
+        error_message = "date format is incorrect"
+
+    else:
+        error_message = bn.set_ticket(user, name, quantity, price, date)
+    # if there is any error messages when selling ticket
+    # at the backend, go back to the profile page.
+    if error_message:
+        render_template('index.html', user=user, tickets=tickets, message=error_message)
+    else:
+        render_template('index.html', user=user, tickets=tickets)
+
+
+def ticket_name_check(name):
+    if name != None:
+        # regex to check username is alphanumeric
+        regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
+        # check username is of required length
+        if len(name) > 6 and len(name) < 60:
+            return re.match(regex, name)
+
+def quantity_check(quantity):
+    pass
+
+def price_check(price):
+    pass
+
+def date_check(date):
+    pass
 
 def authenticate(inner_function):
     """
