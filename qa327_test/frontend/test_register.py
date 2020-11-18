@@ -29,12 +29,26 @@ test_user = User(
     balance=0
 )
 
+# Sample user with an unhashed password
+test_user_unhashed = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password='Password!',
+)
+
 # Moch a newly registered sample user
-test_new_user = User(
+test_valid = User(
     email='valid.email@address.com',
     name='Valid Username',
     password=generate_password_hash('ValidP@ssword'),
     balance=5000
+)
+
+# Newly registered sample user with an unhashed password
+test_valid_unhashed = User(
+    email='valid.email@address.com',
+    name='Valid Username',
+    password='ValidP@ssword',
 )
 
 # Moch some sample tickets
@@ -54,10 +68,10 @@ class RegisterTest(BaseCase):
         self.open(base_url + '/logout')
         # Navigate to /login
         self.open(base_url + '/login')
-        # Enter `test_user.email` in `#email` element
-        self.type("#email", "test_frontend@test.com")
-        # Enter `test_user.password` in `#password` element
-        self.type("#password", "Password!")
+        # Enter `test_user_unhashed.email` in `#email` element
+        self.type("#email", test_user_unhashed.email)
+        # Enter `test_user_unhashed.password` in `#password` element
+        self.type("#password", test_user_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Navigate to /register
@@ -109,13 +123,13 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify that login page is visible by checking expected elements (eg. `form-group`) in DOM
@@ -132,11 +146,11 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -154,11 +168,11 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -176,11 +190,11 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -200,13 +214,13 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter “not.@.valid@email_address.com” in `#email` element
         self.type("#email", "not.@.valid@email_address.com")
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -224,9 +238,9 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter “$Mall” in `#password` element
         self.type("#password", "$Mall")
         # Enter “$Mall” in `#password2` element
@@ -248,9 +262,9 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter “lowerc@se” in `#password` element
         self.type("#password", "lowerc@se")
         # Enter “lowerc@se” in `#password2` element
@@ -272,9 +286,9 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter “UPPERC@SE” in `#password` element
         self.type("#password", "UPPERC@SE")
         # Enter “UPPERC@SE” in `#password2` element
@@ -297,9 +311,9 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter “noSpecial” in `#password` element
         self.type("#password", "noSpecial")
         # Enter “noSpecial” in `#password2` element
@@ -321,11 +335,11 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a different valid password (e.g. “AlsoValidP@ssword”) in `#password2` element
         self.type("#password2", "AlsoValidP@ssword")
         # Click on `#btn-submit` element
@@ -345,11 +359,11 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -369,11 +383,11 @@ class RegisterTest(BaseCase):
         # Enter “#alphanumer” in `#name` element
         self.type("#name", "#alphanumer")
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -393,11 +407,11 @@ class RegisterTest(BaseCase):
         # Enter “2C” in `#name` element
         self.type("#name", "2C")
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -417,11 +431,11 @@ class RegisterTest(BaseCase):
         # Enter “twentycharacterslong” `#name` element
         self.type("#name", "twentycharacterslong")
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
@@ -440,20 +454,20 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays error message by checking content of `#message`
         self.assert_element("#message")
         self.assert_text("This email has been ALREADY used", "#message")
 
-    @patch('qa327.backend.get_user', return_value=test_new_user)
+    @patch('qa327.backend.get_user', return_value=test_valid)
     @patch('qa327.backend.register_user', return_value=None)
     def test_R2_11(self, *_):
         """
@@ -467,19 +481,19 @@ class RegisterTest(BaseCase):
         # Navigate to /register
         self.open(base_url + '/register')
         # Enter a valid username (e.g. “Valid Username”) in `#name` element
-        self.type("#name", "Valid Username")
+        self.type("#name", test_valid_unhashed.name)
         # Enter a valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Enter a valid password (e.g. “ValidP@ssword”) in `#password2` element
-        self.type("#password2", "ValidP@ssword")
+        self.type("#password2", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Enter the same valid email address (e.g. “valid.email@address.com”) in `#email` element
-        self.type("#email", "valid.email@address.com")
+        self.type("#email", test_valid_unhashed.email)
         # Enter the same valid password (e.g. “ValidP@ssword”) in `#password` element
-        self.type("#password", "ValidP@ssword")
+        self.type("#password", test_valid_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Verify current page displays balance at 5000 by checking content of `#balance_message`

@@ -14,6 +14,13 @@ test_user = User(
     balance=0
 )
 
+# Sample user with an unhashed password
+test_user_unhashed = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password='Password!',
+)
+
 class LogoutTest(BaseCase):
 
     def test_R7_1a(self, *_):
@@ -35,9 +42,9 @@ class LogoutTest(BaseCase):
         # Navigate to /login
         self.open(base_url + '/login')
         # Enter `test_user.email` in `#email` element
-        self.type("#email", "test_frontend@test.com")
+        self.type("#email", test_user_unhashed.email)
         # Enter `test_user.password` in `#password` element
-        self.type("#password", "Password!")
+        self.type("#password", test_user_unhashed.password)
         # Click on `#btn-submit` element
         self.click('input[type="submit"]')
         # Navigate to /logout
