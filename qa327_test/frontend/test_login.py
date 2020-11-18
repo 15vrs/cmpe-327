@@ -7,7 +7,7 @@ from qa327.models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Mock a sample user
-test_user = User(
+test_user_hashed = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('Password!'),
@@ -35,7 +35,6 @@ class FrontEndLoginTest(BaseCase):
         self.assert_element_present("input#btn-submit")
 
     # R1.3 If the user has logged in, redirect to the user profile page.
-    # *** failing ***
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.login_user', return_value=test_user)
     def test_login_redirect(self, *_):
