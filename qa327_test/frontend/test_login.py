@@ -7,7 +7,7 @@ from qa327.models import db, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Mock a sample user
-test_user_hashed = User(
+test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password=generate_password_hash('Password!'),
@@ -212,7 +212,7 @@ class FrontEndLoginTest(BaseCase):
         self.assert_element_present("h4#message")
         self.assert_text("email/password combination incorrect", "h4#message")
 
-    # R1.11ab Invalid password redirects to `/login` with error message.
+    # R1.11b Invalid password redirects to `/login` with error message.
     @patch('qa327.backend.login_user', return_value=None)
     def test_login_invalid_password_credential(self, *_):
         # invalidate all sessions
