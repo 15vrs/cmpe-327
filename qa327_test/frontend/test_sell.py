@@ -26,7 +26,7 @@ test_ticket = Ticket(
 # @patch('qa327.backend.login_user', return_value=test_user)
 # class SellTest(BaseCase):
 #
-#     def setupBeforeEachTest(self,  *_):
+#     def login(self,  *_):
 #         # invalidate all sessions
 #         self.open(base_url + '/logout')
 #         # login to access profile page
@@ -39,7 +39,7 @@ test_ticket = Ticket(
 #
 #     # R4.1a Ticket name with special characters produces an error message.
 #     def test_sell_ticket_name_special_characters(self, *_):
-#         SellTest.setupBeforeEachTest(self)
+#         self.login(self)
 #         self.type("#sell-name", "test ticker!@#")
 #         self.type("#sell-quantity", test_ticket.quantity)
 #         self.type("#sell-price", test_ticket.price)
