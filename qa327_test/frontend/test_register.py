@@ -21,7 +21,7 @@ the user from the database.
 Annotate @patch before unit tests can mock backend methods (for that testing function)
 """
 
-# Moch a sample user
+# Mock a sample user
 test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
@@ -36,7 +36,7 @@ test_user_unhashed = User(
     password='Password!',
 )
 
-# Moch a newly registered sample user
+# Mock a newly registered sample user
 test_valid = User(
     email='valid.email@address.com',
     name='Valid Username',
@@ -50,12 +50,6 @@ test_valid_unhashed = User(
     name='Valid Username',
     password='ValidP@ssword',
 )
-
-# Moch some sample tickets
-test_tickets = [
-    {'name': 't1', 'price': '100'}
-]
-
 
 class RegisterTest(BaseCase):
 

@@ -58,7 +58,10 @@ def username_check(name):
 
 @app.route('/login', methods=['GET'])
 def login_get():
-    return render_template('login.html', message='Please login')
+    if 'logged_in' in session:
+        return redirect('/')
+    else:
+        return render_template('login.html', message='Please login')
 
 
 @app.route('/login', methods=['POST'])
@@ -67,7 +70,7 @@ def login_post():
     password = request.form.get('password')
 
     if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
-        return render_template('login.html', message='email/password combination incorrect')
+        return render_template('login.html', message='email/password format is incorrect')
 
     else:
         user = bn.login_user(email, password)
@@ -87,7 +90,7 @@ def login_post():
             # code 303 is to force a 'GET' request
             return redirect('/', code=303)
         else:
-            return render_template('login.html', message='login failed')
+            return render_template('login.html', message='email/password combination incorrect')
 
 def email_check(email):
     if email != None:
