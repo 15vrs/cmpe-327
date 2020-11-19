@@ -31,7 +31,7 @@ class IndexTest(BaseCase):
         self.open(base_url + '/logout')
         # navigate to /login
         self.open(base_url + '/login')
-        # verify login page is visiable by checking expected elements
+        # verify login page is visible by checking expected elements
         self.assert_element("#email")
         self.assert_element("#password")
         self.assert_element("#btn-submit")
@@ -68,7 +68,7 @@ class IndexTest(BaseCase):
         self.assert_element("#balance")
         self.assert_text("User Balance: $5000", "#balance")
         
-    #Todo 3.4 This page shows a logout link, pointing to /logout
+    # 3.4 This page shows a logout link, pointing to /logout
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.login_user', return_value=test_user)
     def test_R3_4(self, *_):
@@ -105,7 +105,7 @@ class IndexTest(BaseCase):
         self.assert_text(test_ticket.price)
         self.assert_text(test_ticket.date)
         
-    #Todo 3.6 This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date.
+    # 3.6 This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date.
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.login_user', return_value=test_user)
     def test_R3_6(self, *_):
@@ -123,7 +123,7 @@ class IndexTest(BaseCase):
         self.assert_element("#sell-price")
         self.assert_element("#sell-date")
 
-    #Todo 3.7 This page contains a form that a user can buy new tickets. Fields: name, quantity
+    # 3.7 This page contains a form that a user can buy new tickets. Fields: name, quantity
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.login_user', return_value=test_user)
     def test_R3_7(self, *_):
@@ -139,7 +139,7 @@ class IndexTest(BaseCase):
         self.assert_element("#buy-name")
         self.assert_element("#buy-quantity")
 
-    #Todo 3.8 This page contains a form that a user can update existing tickets. Fields: name, quantity, price, expiration date
+    # 3.8 This page contains a form that a user can update existing tickets. Fields: name, quantity, price, expiration date
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.login_user', return_value=test_user)
     def test_R3_8(self, *_):
