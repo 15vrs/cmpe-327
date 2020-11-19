@@ -1,0 +1,214 @@
+import pytest
+from seleniumbase import BaseCase
+
+from qa327_test.conftest import base_url
+from unittest.mock import patch
+from qa327.models import db, User, Ticket
+from werkzeug.security import generate_password_hash, check_password_hash
+
+# Mock a sample user
+test_user = User(
+    email='test_frontend@test.com',
+    name='test_frontend',
+    password=generate_password_hash('Password!'),
+    balance=5000
+)
+
+# Mock a ticket
+test_ticket = Ticket(
+    owner = "test_frontend@test.com",
+    name = "test_ticket",
+    quantity = 10,
+    price = 10,
+    date = 20201230
+)
+
+class IndexTest(BaseCase):
+
+    # 3.1 If the user hasn't logged in, redirect the login page
+    def test_R3_1(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # navigate to /login
+        self.open(base_url + '/login')
+        # verify login page is visiable by checking expected elements
+        self.assert_element("#email")
+        self.assert_element("#password")
+        self.assert_element("#btn-submit")
+
+    #3.2 This page shows a header 'Welcome {}'.format(user.name)
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_2(self, *_): 
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page is visible by checking for `#welcome-header` element in DOM
+        self.assert_element("#welcome-header")
+        self.assert_text("Welcome test_frontend", "#welcome-header")
+    
+    #3.3 This page shows user balance.
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_3(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows user balance by checking for '#balance'
+        self.assert_element("#balance")
+        self.assert_text("User Balance: $5000", "#balance")
+        
+    #Todo 3.4 This page shows a logout link, pointing to /logout
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_4(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows a logout link pointing to /logout
+        self.assert_true(self.get_link_attribute('logout','href'), base_url+'/logout')
+
+    #3.5 This page lists all available tickets. Information including the quantity of each ticket,
+    #the owner's email, and the price, for tickets that are not expired.
+    @patch('qa327.backend.get_all_tickets', return_value=[Ticket(owner=test_ticket.owner, name=test_ticket.name, quantity=test_ticket.quantity, price=test_ticket.price, date=test_ticket.date)])
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_5(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows all available tickets
+        self.assert_element("#tickets div h4")
+        self.assert_text(test_ticket.owner)
+        self.assert_text(test_ticket.name)
+        self.assert_text(test_ticket.quantity)
+        self.assert_text(test_ticket.price)
+        self.assert_text(test_ticket.date)
+        
+    #Todo 3.6 This page contains a form that a user can submit new tickets for sell. Fields: name, quantity, price, expiration date.
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_6(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows elements for sell form
+        self.assert_element("#sell-name")
+        self.assert_element("#sell-quantity")
+        self.assert_element("#sell-price")
+        self.assert_element("#sell-date")
+
+    #Todo 3.7 This page contains a form that a user can buy new tickets. Fields: name, quantity
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_7(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows elements for buy form
+        self.assert_element("#buy-name")
+        self.assert_element("#buy-quantity")
+
+    #Todo 3.8 This page contains a form that a user can update existing tickets. Fields: name, quantity, price, expiration date
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_8(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that profile page shows elements for updating existing tickets
+        self.assert_element("#update-name")
+        self.assert_element("#update-quantity")
+        self.assert_element("#update-price")
+        self.assert_element("#update-date")
+
+    # 3.9 The ticket-selling form can be posted to /sell.
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_9(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that sell form can be posted to /sell
+        self.type("#sell-name", test_ticket.owner)
+        self.type("#sell-quantity", test_ticket.quantity)
+        self.type("#sell-price", test_ticket.name)
+        self.type("#sell-date", test_ticket.date)
+        self.click('input[value="Sell"]')
+
+    #3.10 The ticket-buying form can be posted to /buy.
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_10(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that buy form can be posted to /buy
+        self.type("#buy-name", test_ticket.owner)
+        self.type("#buy-quantity", test_ticket.quantity)
+        self.click('input[value="Buy"]')
+
+    # 3.11 The ticket-update form can be posted to /update.
+    @patch('qa327.backend.get_all_tickets', return_value=[Ticket(owner=test_ticket.owner, name=test_ticket.name, quantity=test_ticket.quantity, price=test_ticket.price, date=test_ticket.date)])
+    @patch('qa327.backend.get_user', return_value=test_user)
+    @patch('qa327.backend.login_user', return_value=test_user)
+    def test_R3_11(self, *_):
+        # Navigate to /logout to invalidate any existing sessions
+        self.open(base_url + '/logout')
+        # Navigate to /login
+        self.open(base_url + '/login')
+        # Submit correct credentials
+        self.type("#email", test_user.email)
+        self.type("#password", test_user.password)
+        self.click('input[type="submit"]')
+        # Verify that update form can be posted to /update
+        self.type("#update-name", "updated_test_ticket")
+        self.type("#update-quantity", 11)
+        self.type("#update-price", 1)
+        self.type("#update-date", 20210101)
+        self.click('input[value="Update"]')
