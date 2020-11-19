@@ -50,7 +50,7 @@
 | R2.10        | [POST] `/register`     | If the email already exists, show message 'this email has been ALREADY used'                                                                                  |
 | R2.11        | [POST] `/register`     | If no error regarding the inputs following the rules above, create a new user, set the balance to 5000, and go back to the /login page                        |
 | R3.1         | [GET] `/`              | If the user hasn't logged in, redirect the login page                                                                                                         |
-| R3.2         | [GET] `/`              | This page shows a header 'Hi {}'.format(user.name)                                                                                                            |
+| R3.2         | [GET] `/`              | This page shows a header 'Welcome {}'.format(user.name)                                                                                                            |
 | R3.3         | [GET] `/`              | This page shows user balance.                                                                                                                                 |
 | R3.4         | [GET] `/`              | This page shows a logout link, pointing to /logout                                                                                                            |
 | R3.5         | [GET] `/`              | This page lists all available tickets. Information including the quantity of each ticket, the owner's email, and the price, for tickets that are not expired. |
