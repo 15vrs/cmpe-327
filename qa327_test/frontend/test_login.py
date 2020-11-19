@@ -16,7 +16,6 @@ test_user = User(
 
 class FrontEndLoginTest(BaseCase):
 
-    # verify frontend.getLogin is called?
     # R1.1 If the user hasn't logged in, show the login page.
     # R1.2 The login page has a message that by default says 'please login'.
     # R1.4 The login page provides a login form which requests two fields: email and password.
