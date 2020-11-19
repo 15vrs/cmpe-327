@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<h2 id="welcome-header">Welcome {{ user.name }} !</h2>
+<h2 id="welcome-header">Hi {{ user.name }} !</h2>
 
 <h2 id="balance">User Balance: ${{ user.balance }}</h2>
 
@@ -45,7 +45,7 @@
     </div>
   </form>
 
-<h4 id='buy'>Update Tickets</h4>
+<h4 id='update'>Update Tickets</h4>
 <form method="post">
     <div class="form-group">
       <label for="update-name">Ticket Name</label>

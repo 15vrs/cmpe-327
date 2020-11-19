@@ -49,7 +49,7 @@ class FrontEndLoginTest(BaseCase):
         self.open(base_url + '/login')
         # verify redirect occurred
         self.assert_element_present("h2#welcome-header")
-        self.assert_text("Welcome", "h2#welcome-header")
+        self.assert_text("Hi", "h2#welcome-header")
 
     # R1.5 The login form can be submitted as a POST request to the current URL.
     # R1.7a Valid email can login.
@@ -67,7 +67,7 @@ class FrontEndLoginTest(BaseCase):
         self.click("input#btn-submit")
         # verify `/` page is displayed
         self.assert_element_present("h2#welcome-header")
-        self.assert_text("Welcome", "h2#welcome-header")
+        self.assert_text("Hi", "h2#welcome-header")
 
     # R1.6a Empty email and password does not login.
     def test_login_empty_inputs(self, *_):

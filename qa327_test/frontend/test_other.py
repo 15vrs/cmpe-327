@@ -85,4 +85,4 @@ class OtherTest(BaseCase):
         self.open(base_url + '/')
         # Verify current page does not display the 404 error message by checking content of `#welcome-header`
         self.assert_element("#welcome-header")
-        self.assert_text("Welcome test_frontend", "#welcome-header")
+        self.assert_text("Hi test_frontend", "#welcome-header")

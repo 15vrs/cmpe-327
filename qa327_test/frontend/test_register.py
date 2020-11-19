@@ -72,7 +72,7 @@ class RegisterTest(BaseCase):
         self.open(base_url + '/register')
         # Verify that profile page is visible by checking for `#welcome-header` element in DOM
         self.assert_element("#welcome-header")
-        self.assert_text("Welcome test_frontend", "#welcome-header")
+        self.assert_text("Hi test_frontend", "#welcome-header")
 
     def test_R2_2(self, *_):
         """
