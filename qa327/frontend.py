@@ -160,6 +160,8 @@ def profile(user):
 
 @app.route('/update', methods=['POST'])
 def update_post():
+    user_email = session['logged_in']
+    user_name = bn.get_user(email)
     ticket_name = request.form.get('update-name')
     ticket_quantity = request.form.get('update-quantity')
     ticket_price = request.form.get('update-price')
@@ -182,7 +184,8 @@ def update_post():
         error_message = "Date in ticket update form has already past"
     
     else:
-        error_message = bn.update_ticket(ticket_name, ticket_quantity, ticket_price, ticket_date)
+        set_ticket(user_name, ticket_name, 3, ticket_price, ticket_date)
+        error_message = bn.update_ticket(user_name, ticket_name, ticket_quantity, ticket_price, ticket_date)
 
     if error_message:
         return render_template('index.html', message=error_message)

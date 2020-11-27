@@ -76,3 +76,15 @@ def get_all_tickets():
     """
     tik = Ticket.query.filter(Ticket.date > int(date.today().strftime('%Y%m%d'))).all()
     return tik
+
+def update_ticket(owner, name, quantity, price, date):
+    """
+    """
+    tik = Ticket.query.filter_by(owner=owner, name=name).first()
+    if tik:
+        return "Ticket does not exist"
+    tik.quantity = quantity
+    tik.price = price
+    tik.date = date
+    Ticket.commit()
+    return tik
