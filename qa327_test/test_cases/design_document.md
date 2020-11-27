@@ -7,23 +7,25 @@
 | User(db.Model)   | Contains all stored information for a given user   |
 | Ticket(db.Model) | Contains all stored information for a given ticket |
 
-| Layer    | Methods                                         | Description                                                           |
-|----------|-------------------------------------------------|-----------------------------------------------------------------------|
-| Frontend | register_get()                                  | Renders register page if not logged in                                |
-| Frontend | register_post()                                 | Attempts to register with supplied new user information               |
-| Frontend | login_get()                                     | Renders login page with a login message                               |
-| Frontend | login_post()                                    | Attempts to login with an email and password                          |
-| Frontend | authenticate(inner_function)                    | Wrapper, authenticates user before allowing access to other functions |
-| Frontend | profile(user)                                   | Renders user’s profile page and tickets menu                          |
-| Frontend | email_check(email)                              | Verifies format of email passed in                                    |
-| Frontend | pwd_check(password)                             | Verifies format of password passed in                                 |
-| Frontend | username_check(name)                            | Verifies format of username passed in                                 |
-| Backend  | get_user(email)                                 | Attempt to return user based on supplied email                        |
-| Backend  | login_user(email, password)                     | Attempt to authenticate user’s login                                  |
-| Backend  | register_user(email, name, password, password2) | Attempt to register new user to the database                          |
-| Backend  | get_all_tickets()                               | Return all non-expired tickets from database                          |
-| Backend  | set_ticket(owner, name, quantity, price, date)  | Attempt to register a new ticket to the database                      |
-
+| Layer    | Methods                                           | Description                                                           |
+|----------|---------------------------------------------------|-----------------------------------------------------------------------|
+| Frontend | register_get()                                    | Renders register page if not logged in                                |
+| Frontend | register_post()                                   | Attempts to register with supplied new user information               |
+| Frontend | login_get()                                       | Renders login page with a login message                               |
+| Frontend | login_post()                                      | Attempts to login with an email and password                          |
+| Frontend | authenticate(inner_function)                      | Wrapper, authenticates user before allowing access to other functions |
+| Frontend | profile(user)                                     | Renders user’s profile page and tickets menu                          |
+| Frontend | email_check(email)                                | Verifies format of email passed in                                    |
+| Frontend | pwd_check(password)                               | Verifies format of password passed in                                 |
+| Frontend | username_check(name)                              | Verifies format of username passed in                                 |
+| Frontend | update_post()                                     | Attempts to update an existent ticket                                 |
+| Frontend | ticket_name_check(name)                           | Verifies format of ticket name passed in                              |
+| Backend  | get_user(email)                                   | Attempt to return user based on supplied email                        |
+| Backend  | login_user(email, password)                       | Attempt to authenticate user’s login                                  |
+| Backend  | register_user(email, name, password, password2)   | Attempt to register new user to the database                          |
+| Backend  | get_all_tickets()                                 | Return all non-expired tickets from database                          |
+| Backend  | set_ticket(owner, name, quantity, price, date)    | Attempt to register a new ticket to the database                      |
+| Backend  | update_ticket(owner, name, quantity, price, date) | Attempt to update a ticket in the database                            |
 ## Test Plan
 
 **How test cases of different levels (frontend, backend units, integration) are organized.**
