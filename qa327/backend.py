@@ -81,10 +81,10 @@ def update_ticket(owner, name, quantity, price, date):
     """
     """
     tik = Ticket.query.filter_by(owner=owner, name=name).first()
-    if tik:
+    if not tik:
         return "Ticket does not exist"
     tik.quantity = quantity
     tik.price = price
     tik.date = date
-    Ticket.commit()
-    return tik
+    db.session.commit()
+    return None

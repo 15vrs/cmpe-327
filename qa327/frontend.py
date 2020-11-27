@@ -158,14 +158,14 @@ def profile(user):
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
 
-@app.route('/update', methods=['POST'])
+@app.route('/', methods=['POST'])
 def update_post():
     user_email = session['logged_in']
-    user_name = bn.get_user(email)
+    user_name = bn.get_user(user_email).name
     ticket_name = request.form.get('update-name')
-    ticket_quantity = request.form.get('update-quantity')
-    ticket_price = request.form.get('update-price')
-    ticket_date = request.form.get('update-date')
+    ticket_quantity = int(request.form.get('update-quantity'))
+    ticket_price =int(request.form.get('update-price'))
+    ticket_date = int(request.form.get('update-date'))
     error_message = None
 
     if (ticket_name_check(ticket_name) is None): #no match in regex
@@ -177,14 +177,13 @@ def update_post():
     elif ticket_price < 10 or ticket_price > 100:
         error_message = "Invalid price in ticket update form"
 
-    elif len(ticket_date) != 8:
+    elif len(str(ticket_date)) != 8:
         error_message = "Invalid date in ticket update form"
     
     elif (ticket_date < int(date.today().strftime("%Y%m%d"))):
         error_message = "Date in ticket update form has already past"
     
     else:
-        set_ticket(user_name, ticket_name, 3, ticket_price, ticket_date)
         error_message = bn.update_ticket(user_name, ticket_name, ticket_quantity, ticket_price, ticket_date)
 
     if error_message:
