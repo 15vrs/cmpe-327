@@ -161,7 +161,6 @@ def profile(user):
 @app.route('/', methods=['POST'])
 def update_post():
     user_email = session['logged_in']
-    user_name = bn.get_user(user_email).name
     ticket_name = request.form.get('update-name')
     ticket_quantity = int(request.form.get('update-quantity'))
     ticket_price =int(request.form.get('update-price'))
@@ -184,8 +183,10 @@ def update_post():
         error_message = "Date in ticket update form has already past"
     
     else:
-        error_message = bn.update_ticket(user_name, ticket_name, ticket_quantity, ticket_price, ticket_date)
+        error_message = bn.update_ticket(user_email, ticket_name, ticket_quantity, ticket_price, ticket_date)
 
+    # if there is any error messages when updating the ticket
+    # go back to the index page with the error message.
     if error_message:
         return render_template('index.html', message=error_message)
     else:
@@ -193,8 +194,8 @@ def update_post():
     
 def ticket_name_check(name):
     if name != None:
-        # regex to check username is alphanumeric
+        # regex to check ticket name is alphanumeric
         regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
-        # check username is of required length
+        # check ticket name is under maximum length
         if len(name) <= 60:
             return re.match(regex, name)

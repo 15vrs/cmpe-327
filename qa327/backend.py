@@ -79,6 +79,8 @@ def get_all_tickets():
 
 def update_ticket(owner, name, quantity, price, date):
     """
+    Attempt to update a ticket in the database
+    :return: an error message if there is any, or None if update succeeds
     """
     tik = Ticket.query.filter_by(owner=owner, name=name).first()
     if not tik:
