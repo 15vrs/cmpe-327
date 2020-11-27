@@ -76,3 +76,17 @@ def get_all_tickets():
     """
     tik = Ticket.query.filter(Ticket.date > int(date.today().strftime('%Y%m%d'))).all()
     return tik
+
+def update_ticket(owner, name, quantity, price, date):
+    """
+    Attempt to update a ticket in the database
+    :return: an error message if there is any, or None if update succeeds
+    """
+    tik = Ticket.query.filter_by(owner=owner, name=name).first()
+    if not tik:
+        return "Ticket does not exist"
+    tik.quantity = quantity
+    tik.price = price
+    tik.date = date
+    db.session.commit()
+    return None
