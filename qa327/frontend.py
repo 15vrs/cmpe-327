@@ -1,5 +1,6 @@
 from flask import render_template, request, session, redirect
 from qa327 import app
+from datetime import date
 import qa327.backend as bn
 import re
 
@@ -156,3 +157,42 @@ def profile(user):
     # front-end portals
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
+
+@app.route('/update', methods=['POST'])
+def update_post():
+    ticket_name = request.form.get('update-name')
+    ticket_quantity = request.form.get('update-quantity')
+    ticket_price = request.form.get('update-price')
+    ticket_date = request.form.get('update-date')
+    error_message = None
+
+    if (ticket_name_check(ticket_name) is None): #no match in regex
+        error_message = 'Ticket name is incorrect'
+
+    elif ticket_quantity <= 0 or ticket_quantity > 100:
+        error_message = "Invalid quantity in ticket update form"
+
+    elif ticket_price < 10 or ticket_price > 100:
+        error_message = "Invalid price in ticket update form"
+
+    elif len(ticket_date) != 8:
+        error_message = "Invalid date in ticket update form"
+    
+    elif (ticket_date < int(date.today().strftime("%Y%m%d"))):
+        error_message = "Date in ticket update form has already past"
+    
+    else:
+        error_message = bn.update_ticket(ticket_name, ticket_quantity, ticket_price, ticket_date)
+
+    if error_message:
+        return render_template('index.html', message=error_message)
+    else:
+        return redirect('/')
+    
+def ticket_name_check(name):
+    if name != None:
+        # regex to check username is alphanumeric
+        regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
+        # check username is of required length
+        if len(name) <= 60:
+            return re.match(regex, name)
