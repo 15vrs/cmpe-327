@@ -204,6 +204,8 @@ def form_button():
         error_message = update_post()
     elif "Buy" in request.form['submit']:
         error_message = buy_post()
+    elif "Sell" in request.form['submit']:
+        error_message = sell_post()
     # if there is any error messages
     # go back to the index page with the error message.
     user = bn.get_user(session['logged_in'])
@@ -228,7 +230,7 @@ def update_post():
     elif (quantity_check(ticket_quantity) is None):
         error_message = "Invalid quantity in ticket update form"
 
-    elif ticket_price < 10 or ticket_price > 100:
+    elif price_check(ticket_price):
         error_message = "Invalid price in ticket update form"
 
     elif len(str(ticket_date)) != 8:
@@ -266,7 +268,7 @@ def ticket_name_check(name):
         # regex to check ticket name is alphanumeric
         regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
         # check ticket name is under maximum length, include optional check for min char length
-        if len(name) >= 6 and len(name) < 60:
+        if 6 <= len(name) < 60:
             return re.match(regex, name)
 
 
