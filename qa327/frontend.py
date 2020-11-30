@@ -16,9 +16,9 @@ The html templates are stored in the 'templates' folder.
 def register_get():
     # if already logged in, redirect to profile page
     if 'logged_in' in session:
-	    return redirect('/')
+        return redirect('/')
     else:
-	# templates are stored in the templates folder
+        # templates are stored in the templates folder
         return render_template('register.html', message='')
 
 
@@ -30,28 +30,25 @@ def register_post():
     password2 = request.form.get('password2')
     error_message = None
 
-
-    if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
+    if (email_check(email) is None) or (pwd_check(password) is None):  # no match in regex
         error_message = 'Email/Password combination incorrect'
 
     elif password != password2:
         error_message = "The passwords do not match"
 
-    elif username_check(name) is None: #no match in regex
+    elif username_check(name) is None:  # no match in regex
         error_message = "Username format error"
 
     else:
-        user = bn.get_user(email)
-    if user:
-        error_message = "User exists"
-    else:
         error_message = bn.register_user(email, name, password, password2)
+
     # if there is any error messages when registering new user
     # at the backend, go back to the register page.
     if error_message:
         return render_template('login.html', message=error_message)
     else:
         return redirect('/login')
+
 
 def username_check(name):
     if name != None:
@@ -60,6 +57,7 @@ def username_check(name):
         # check username is of required length
         if len(name) > 2 and len(name) < 20:
             return re.match(regex, name)
+
 
 @app.route('/login', methods=['GET'])
 def login_get():
@@ -73,7 +71,7 @@ def login_get():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
+    if (email_check(email) is None) or (pwd_check(password) is None):  # no match in regex
         return render_template('login.html', message='email/password format is incorrect')
 
     else:
@@ -97,11 +95,13 @@ def login_post():
     else:
         return render_template('login.html', message='email/password combination incorrect')
 
+
 def email_check(email):
     if email != None:
         # regex to check email conforms to RFC-5322
         regex = '(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)'
         return re.match(regex, email)
+
 
 def pwd_check(password):
     if password != None:
@@ -110,11 +110,13 @@ def pwd_check(password):
         regex = '^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)[A-Za-z\d\W]{6,}$'
         return re.match(regex, password)
 
+
 @app.route('/logout')
 def logout():
     if 'logged_in' in session:
         session.pop('logged_in', None)
     return redirect('/')
+
 
 @app.route('/', methods=['POST'])
 def sell_post():
@@ -148,6 +150,7 @@ def sell_post():
         return render_template('index.html', user=user, tickets=tickets, message=error_message)
     else:
         return redirect('/')
+
 
 def authenticate(inner_function):
     """
@@ -194,6 +197,7 @@ def profile(user):
     tickets = bn.get_all_tickets()
     return render_template('index.html', user=user, tickets=tickets)
 
+
 @app.route('/', methods=['POST'])
 def form_button():
     if "Update" in request.form['submit']:
@@ -209,15 +213,16 @@ def form_button():
     else:
         return redirect('/')
 
+
 def update_post():
     user_email = session['logged_in']
     ticket_name = request.form.get('update-name')
     ticket_quantity = int(request.form.get('update-quantity'))
-    ticket_price =int(request.form.get('update-price'))
+    ticket_price = int(request.form.get('update-price'))
     ticket_date = int(request.form.get('update-date'))
     error_message = None
 
-    if (ticket_name_check(ticket_name) is None): #no match in regex
+    if (ticket_name_check(ticket_name) is None):  # no match in regex
         error_message = 'Ticket name is incorrect'
 
     elif (quantity_check(ticket_quantity) is None):
@@ -228,14 +233,15 @@ def update_post():
 
     elif len(str(ticket_date)) != 8:
         error_message = "Invalid date in ticket update form"
-    
+
     elif (ticket_date < int(date.today().strftime("%Y%m%d"))):
         error_message = "Date in ticket update form has already past"
-    
+
     else:
         error_message = bn.update_ticket(user_email, ticket_name, ticket_quantity, ticket_price, ticket_date)
 
     return error_message
+
 
 def buy_post():
     user_email = session['logged_in']
@@ -243,16 +249,17 @@ def buy_post():
     ticket_quantity = int(request.form.get('buy-quantity'))
     error_message = None
 
-    if (ticket_name_check(ticket_name) is None): #no match in regex
+    if (ticket_name_check(ticket_name) is None):  # no match in regex
         error_message = 'Ticket name is incorrect'
 
     elif (quantity_check(ticket_quantity) is None):
         error_message = "Invalid quantity in ticket buy form"
 
     else:
-        error_message = bn.buy_ticket(user_email,ticket_name,ticket_quantity)
+        error_message = bn.buy_ticket(user_email, ticket_name, ticket_quantity)
 
     return error_message
+
 
 def ticket_name_check(name):
     if name != None:
@@ -264,7 +271,8 @@ def ticket_name_check(name):
 
 
 def quantity_check(quantity):
-    return quantity <= 0 or quantity > 100
+    if quantity is not None:
+        return quantity <= 0 or quantity > 100
 
 
 def price_check(price):
@@ -272,7 +280,7 @@ def price_check(price):
 
 
 def date_check(expiry):
-    if len(str(expiry)) != 8: # check if in proper format length
+    if len(str(expiry)) != 8:  # check if in proper format length
         return False
     else:
-        return expiry < int(date.today().strftime("%Y%m%d")) # check if expiry is before today
+        return expiry < int(date.today().strftime("%Y%m%d"))  # check if expiry is before today
