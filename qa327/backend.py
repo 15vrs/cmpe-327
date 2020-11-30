@@ -90,3 +90,29 @@ def update_ticket(owner, name, quantity, price, date):
     tik.date = date
     db.session.commit()
     return None
+
+def buy_ticket(email, name, quantity):
+    """
+    Attmempt to buy a ticket in the database
+    :param owner: the email of the ticket buyer
+    :param name: the name of the ticket being bought
+    :param quantity: the quantity of tickets being bought
+    :return: an error message if there is any, or None if register succeeds
+    """
+    user = User.query.filter_by(email=email).first()
+    tik = Ticket.query.filter_by(name=name).first()
+    if not tik:
+        return "Ticket does not exist"
+    elif tik.quantity < quantity:
+        return "Not enough tickets for sale"
+    elif user.balance < (tik.price * quantity * 1.40):
+        return "Insufficient balance"
+    
+    #tickets can be bought
+    user.balance = user.balance - (tik.price * quantity * 1.40)
+    if tik.quantity == quantity:
+        db.session.delete(tik)
+    else:
+        tik.quantity = tik.quantity - quantity
+    db.session.commit()
+    return None
