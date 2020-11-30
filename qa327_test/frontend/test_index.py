@@ -113,9 +113,9 @@ class IndexTest(BaseCase):
         self._login()
         # Verify that sell form can be posted to /sell
         self.type("#sell-name", test_ticket.owner)
-        self.type("#sell-quantity", test_ticket.quantity)
-        self.type("#sell-price", test_ticket.name)
-        self.type("#sell-date", test_ticket.date)
+        self.type("#sell-quantity", str(test_ticket.quantity))
+        self.type("#sell-price", str(test_ticket.price))
+        self.type("#sell-date", str(test_ticket.date))
         self.click('input[value="Sell"]')
 
     # 3.10 The ticket-buying form can be posted to /buy.
@@ -124,7 +124,7 @@ class IndexTest(BaseCase):
         self._login()
         # Verify that buy form can be posted to /buy
         self.type("#buy-name", test_ticket.owner)
-        self.type("#buy-quantity", test_ticket.quantity)
+        self.type("#buy-quantity", str(test_ticket.quantity))
         self.click('input[value="Buy"]')
 
     # 3.11 The ticket-update form can be posted to /update.
@@ -133,7 +133,7 @@ class IndexTest(BaseCase):
         self._login()
         # Verify that update form can be posted to /update
         self.type("#update-name", "updated_test_ticket")
-        self.type("#update-quantity", 11)
-        self.type("#update-price", 1)
-        self.type("#update-date", 20210101)
+        self.type("#update-quantity", str(11))
+        self.type("#update-price", str(1))
+        self.type("#update-date", str(20210101))
         self.click('input[value="Update"]')
