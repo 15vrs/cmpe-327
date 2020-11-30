@@ -41,8 +41,7 @@ def register_post():
         error_message = "Username format error"
 
     else:
-    """
-    user = bn.get_user(email)
+        user = bn.get_user(email)
     if user:
         error_message = "User exists"
     else:
@@ -74,13 +73,12 @@ def login_get():
 def login_post():
     email = request.form.get('email')
     password = request.form.get('password')
-    """
     if (email_check(email) is None) or (pwd_check(password) is None): #no match in regex
         return render_template('login.html', message='email/password format is incorrect')
 
     else:
-    """
-    user = bn.login_user(email, password)
+        user = bn.login_user(email, password)
+
     if user:
         session['logged_in'] = user.email
         """
@@ -123,52 +121,33 @@ def sell_post():
     email = request.form.get('user-email')
     user = bn.get_user(email)
     name = request.form.get('sell-name')
-    quantity = request.form.get('sell-quantity')
-    price = request.form.get('sell-price')
-    date = request.form.get('sell-date')
+    quantity = int(request.form.get('sell-quantity'))
+    price = int(request.form.get('sell-price'))
+    expiry = int(request.form.get('sell-date'))
     tickets = bn.get_all_tickets()
 
-    """
-    if (ticket_name_check(name) is None): #no match in regex
+    if ticket_name_check(name) is None:  # no match in regex
         error_message = 'ticket name format is incorrect'
 
-    elif (quantity_check(quantity) is None): #no match in regex
+    elif quantity_check(quantity):
         error_message = "quantity format is incorrect"
 
-    elif (price_check(price) is None):  # no match in regex
+    elif price_check(price):
         error_message = "price format is incorrect"
 
-    elif (date_check(date) is None): #no match in regex
+    elif date_check(expiry):
         error_message = "date format is incorrect"
 
     else:
-    """
-    error_message = bn.set_ticket(user, name, quantity, price, date)
-    return redirect('/', code=303) 
+        error_message = bn.set_ticket(email, name, quantity, price, expiry)
+
     # if there is any error messages when selling ticket
     # at the backend, go back to the profile page.
     if error_message:
-        #i think you have to return these
-        render_template('index.html', user=user, tickets=tickets, message=error_message)
+        print(error_message)
+        return render_template('index.html', user=user, tickets=tickets, message=error_message)
     else:
-        render_template('index.html', user=user, tickets=tickets)
-
-def ticket_name_check(name):
-    if name != None:
-        # regex to check username is alphanumeric
-        regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
-        # check username is of required length
-        if len(name) > 6 and len(name) < 60:
-            return re.match(regex, name)
-
-def quantity_check(quantity):
-    pass
-
-def price_check(price):
-    pass
-
-def date_check(date):
-    pass
+        return redirect('/')
 
 def authenticate(inner_function):
     """
@@ -279,9 +258,21 @@ def ticket_name_check(name):
     if name != None:
         # regex to check ticket name is alphanumeric
         regex = '^[a-zA-Z0-9]+[a-zA-Z0-9 ]?[a-zA-Z0-9]+$'
-        # check ticket name is under maximum length
-        if len(name) <= 60:
+        # check ticket name is under maximum length, include optional check for min char length
+        if len(name) >= 6 and len(name) < 60:
             return re.match(regex, name)
+
 
 def quantity_check(quantity):
     return quantity <= 0 or quantity > 100
+
+
+def price_check(price):
+    return price < 10 or price > 100
+
+
+def date_check(expiry):
+    if len(str(expiry)) != 8: # check if in proper format length
+        return False
+    else:
+        return expiry < int(date.today().strftime("%Y%m%d")) # check if expiry is before today
