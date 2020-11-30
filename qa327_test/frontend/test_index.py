@@ -108,7 +108,6 @@ class IndexTest(BaseCase):
         self.assert_element("#update-date")
 
     # 3.9 The ticket-selling form can be posted to /sell.
-    @patch('qa327.backend.get_all_tickets', return_value=[test_ticket])
     def test_R3_9(self, *_):
         self._login()
         # Verify that sell form can be posted to /sell
@@ -119,7 +118,6 @@ class IndexTest(BaseCase):
         self.click('input[value="Sell"]')
 
     # 3.10 The ticket-buying form can be posted to /buy.
-    @patch('qa327.backend.get_all_tickets', return_value=[test_ticket])
     def test_R3_10(self, *_):
         self._login()
         # Verify that buy form can be posted to /buy
@@ -128,7 +126,6 @@ class IndexTest(BaseCase):
         self.click('input[value="Buy"]')
 
     # 3.11 The ticket-update form can be posted to /update.
-    @patch('qa327.backend.get_all_tickets', return_value=[test_ticket])
     def test_R3_11(self, *_):
         self._login()
         # Verify that update form can be posted to /update
