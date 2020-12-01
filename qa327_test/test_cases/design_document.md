@@ -19,13 +19,21 @@
 | Frontend | pwd_check(password)                               | Verifies format of password passed in                                 |
 | Frontend | username_check(name)                              | Verifies format of username passed in                                 |
 | Frontend | update_post()                                     | Attempts to update an existent ticket                                 |
+| Frontend | buy_post()                                        | Attempts to buy an existent ticket                                    |
+| Frontend | sell_post()                                       | Attempts to sell an existent ticket                                   |
 | Frontend | ticket_name_check(name)                           | Verifies format of ticket name passed in                              |
+| Frontend | quantity_check()(quantity)                        | Verifies quantity of ticket is in range (0,100]                       |
+| Frontend | price_check(price)                                | Verifies price of ticket is in range [10,100]                         |
+| Frontend | date_check(expiry)                                | Verifies expiry date of ticket is in proper format and not expired    |
 | Backend  | get_user(email)                                   | Attempt to return user based on supplied email                        |
 | Backend  | login_user(email, password)                       | Attempt to authenticate user’s login                                  |
 | Backend  | register_user(email, name, password, password2)   | Attempt to register new user to the database                          |
 | Backend  | get_all_tickets()                                 | Return all non-expired tickets from database                          |
 | Backend  | set_ticket(owner, name, quantity, price, date)    | Attempt to register a new ticket to the database                      |
 | Backend  | update_ticket(owner, name, quantity, price, date) | Attempt to update a ticket in the database                            |
+| Backend  | buy_ticket(email, name, quantity)                 | Attempt to buy a ticket in the database                               |
+
+
 ## Test Plan
 
 **How test cases of different levels (frontend, backend units, integration) are organized.**
