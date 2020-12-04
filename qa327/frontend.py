@@ -118,40 +118,6 @@ def logout():
     return redirect('/')
 
 
-@app.route('/', methods=['POST'])
-def sell_post():
-    email = request.form.get('user-email')
-    user = bn.get_user(email)
-    name = request.form.get('sell-name')
-    quantity = int(request.form.get('sell-quantity'))
-    price = int(request.form.get('sell-price'))
-    expiry = int(request.form.get('sell-date'))
-    tickets = bn.get_all_tickets()
-
-    if ticket_name_check(name) is None:  # no match in regex
-        error_message = 'ticket name format is incorrect'
-
-    elif quantity_check(quantity):
-        error_message = "quantity format is incorrect"
-
-    elif price_check(price):
-        error_message = "price format is incorrect"
-
-    elif date_check(expiry):
-        error_message = "date format is incorrect"
-
-    else:
-        error_message = bn.set_ticket(email, name, quantity, price, expiry)
-
-    # if there is any error messages when selling ticket
-    # at the backend, go back to the profile page.
-    if error_message:
-        print(error_message)
-        return render_template('index.html', user=user, tickets=tickets, message=error_message)
-    else:
-        return redirect('/')
-
-
 def authenticate(inner_function):
     """
     :param inner_function: any python function that accepts a user object
@@ -227,17 +193,14 @@ def update_post():
     if (ticket_name_check(ticket_name) is None):  # no match in regex
         error_message = 'Ticket name is incorrect'
 
-    elif (quantity_check(ticket_quantity) is None):
+    elif quantity_check(ticket_quantity):
         error_message = "Invalid quantity in ticket update form"
 
     elif price_check(ticket_price):
         error_message = "Invalid price in ticket update form"
 
-    elif len(str(ticket_date)) != 8:
+    elif date_check(ticket_date):
         error_message = "Invalid date in ticket update form"
-
-    elif (ticket_date < int(date.today().strftime("%Y%m%d"))):
-        error_message = "Date in ticket update form has already past"
 
     else:
         error_message = bn.update_ticket(user_email, ticket_name, ticket_quantity, ticket_price, ticket_date)
@@ -254,13 +217,46 @@ def buy_post():
     if (ticket_name_check(ticket_name) is None):  # no match in regex
         error_message = 'Ticket name is incorrect'
 
-    elif (quantity_check(ticket_quantity) is None):
+    elif quantity_check(ticket_quantity):
         error_message = "Invalid quantity in ticket buy form"
 
     else:
         error_message = bn.buy_ticket(user_email, ticket_name, ticket_quantity)
 
     return error_message
+
+
+def sell_post():
+    email = request.form.get('user-email')
+    user = bn.get_user(email)
+    name = request.form.get('sell-name')
+    quantity = int(request.form.get('sell-quantity'))
+    price = int(request.form.get('sell-price'))
+    expiry = int(request.form.get('sell-date'))
+    tickets = bn.get_all_tickets()
+
+    if ticket_name_check(name) is None:  # no match in regex
+        error_message = 'ticket name format is incorrect'
+
+    elif quantity_check(quantity):
+        error_message = "quantity format is incorrect"
+
+    elif price_check(price):
+        error_message = "price format is incorrect"
+
+    elif date_check(expiry):
+        error_message = "date format is incorrect"
+
+    else:
+        error_message = bn.set_ticket(email, name, quantity, price, expiry)
+
+    # if there is any error messages when selling ticket
+    # at the backend, go back to the profile page.
+    if error_message:
+        print(error_message)
+        return render_template('index.html', user=user, tickets=tickets, message=error_message)
+    else:
+        return redirect('/')
 
 
 def ticket_name_check(name):
@@ -275,14 +271,23 @@ def ticket_name_check(name):
 def quantity_check(quantity):
     if quantity is not None:
         return quantity <= 0 or quantity > 100
+    return True
 
 
 def price_check(price):
-    return price < 10 or price > 100
+    if price is not None:
+        return price < 10 or price > 100
+    return True
 
 
 def date_check(expiry):
-    if len(str(expiry)) != 8:  # check if in proper format length
-        return False
-    else:
-        return expiry < int(date.today().strftime("%Y%m%d"))  # check if expiry is before today
+    if expiry is not None:
+        if len(str(expiry)) != 8:  # check if in proper format length
+            return True
+        elif int(str(expiry)[4:6]) <= 0 or int(str(expiry)[4:6]) > 12:
+            return True
+        elif int(str(expiry)[6:8]) <= 0 or int(str(expiry)[6:8]) > 31:
+            return True
+        else:
+            return expiry < int(date.today().strftime("%Y%m%d"))  # check if expiry is before today
+    return True
