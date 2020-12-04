@@ -25,9 +25,9 @@ test_user_unhashed = User(
 test_ticket = Ticket(
     owner = 'test_frontend@test.com',
     name = 'Test Ticket',
-    quantity = 1,
-    price = 20,
-    date = 20210901
+    quantity = '1',
+    price = '20',
+    date = '20210901'
 )
 
 class UpdateTest(BaseCase):
