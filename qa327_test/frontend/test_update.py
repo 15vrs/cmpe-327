@@ -21,7 +21,7 @@ test_user_unhashed = User(
     password='Password!',
 )
 
-# Mock some sample tickets
+# Mock some sample tickets, all attributes are strings due to error with Github's pytest
 test_ticket = Ticket(
     owner = 'test_frontend@test.com',
     name = 'Test Ticket',
