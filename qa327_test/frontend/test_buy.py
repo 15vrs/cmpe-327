@@ -43,7 +43,7 @@ class SellTest(BaseCase):
         """
         self._login()
         self.type("#buy-name", "#invalidticket")
-        self.type("#buy-quantity", test_ticket.quantity)
+        self.type("#buy-quantity", str(test_ticket.quantity))
         # Click on `#update-submit` element
         self.click('input[value="Buy"]')
         # Verify profile page displays error message by checking content of `#message`
@@ -58,7 +58,7 @@ class SellTest(BaseCase):
         """
         self._login()
         self.type("#buy-name", " firstchar")
-        self.type("#buy-quantity", test_ticket.quantity)
+        self.type("#buy-quantity", str(test_ticket.quantity))
         # Click on `#update-submit` element
         self.click('input[value="Buy"]')
         # Verify profile page displays error message by checking content of `#message`
@@ -73,7 +73,7 @@ class SellTest(BaseCase):
         """
         self._login()
         self.type("#buy-name", "lastchar ")
-        self.type("#buy-quantity", test_ticket.quantity)
+        self.type("#buy-quantity", str(test_ticket.quantity))
         # Click on `#update-submit` element
         self.click('input[value="Buy"]')
         # Verify profile page displays error message by checking content of `#message`
@@ -88,7 +88,7 @@ class SellTest(BaseCase):
         """
         self._login()
         self.type("#buy-name", "unfortunatelythistickethasalittleoversixtycharactersinitsname")
-        self.type("#buy-quantity", test_ticket.quantity)
+        self.type("#buy-quantity", str(test_ticket.quantity))
         # Click on `#update-submit` element
         self.click('input[value="Buy"]')
         # Verify profile page displays error message by checking content of `#message`
