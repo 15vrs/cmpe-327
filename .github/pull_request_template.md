@@ -21,6 +21,7 @@ Please describe the tests that you ran to verify your changes. Provide instructi
 - [ ] test_logout.py
 - [ ] test_other.py
 - [ ] test_register.py
+- [ ] test_buy.py
 - [ ] test_update.py
 - [ ] test_registration.py
 
