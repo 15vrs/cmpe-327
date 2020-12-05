@@ -250,14 +250,7 @@ def sell_post():
     else:
         error_message = bn.set_ticket(email, name, quantity, price, expiry)
 
-    # if there is any error messages when selling ticket
-    # at the backend, go back to the profile page.
-    if error_message:
-        print(error_message)
-        return render_template('index.html', user=user, tickets=tickets, message=error_message)
-    else:
-        return redirect('/')
-
+    return error_message
 
 def ticket_name_check(name):
     if name != None:

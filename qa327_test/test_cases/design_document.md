@@ -32,6 +32,7 @@
 | Backend  | set_ticket(owner, name, quantity, price, date)    | Attempt to register a new ticket to the database                      |
 | Backend  | update_ticket(owner, name, quantity, price, date) | Attempt to update a ticket in the database                            |
 | Backend  | buy_ticket(email, name, quantity)                 | Attempt to buy a ticket in the database                               |
+| Backend  | delete_database()                                 | Deletes all data inside the User and Ticket databases                 |
 
 
 ## Test Plan

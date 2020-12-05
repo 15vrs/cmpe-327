@@ -116,3 +116,11 @@ def buy_ticket(email, name, quantity):
         tik.quantity = tik.quantity - quantity
     db.session.commit()
     return None
+
+def delete_database():
+    """
+    Deletes both the Ticket and User databases
+    """
+    User.query.delete()
+    Ticket.query.delete()
+    db.session.commit()
