@@ -470,7 +470,7 @@ class UpdateTest(BaseCase):
         self.open(base_url + '/logout')
     
     @patch('qa327.backend.get_user', return_value=test_user)
-    @patch('qa327.backend.set_ticket', return_value=None)
+    @patch('qa327.backend.update_ticket', return_value=None)
     def test_R5_7b(self, *_):
         """
         An update without errors passes successfully
@@ -498,7 +498,6 @@ class UpdateTest(BaseCase):
         # Click on `#update-submit` element
         self.click('input[value="Update"]')
         # Verify profile page displays no error
-        self.assert_element("#message")
-        self.assert_text("", "#message")
+        self.assert_element_not_visible("#message")
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
