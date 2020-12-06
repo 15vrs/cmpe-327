@@ -99,16 +99,8 @@ def buy_ticket(email, name, quantity):
     :param quantity: the quantity of tickets being bought
     :return: an error message if there is any, or None if register succeeds
     """
-    user = User.query.filter_by(email=email).first()
+    user = User.query.filter_by(email=email).first().balance
     tik = Ticket.query.filter_by(name=name).first()
-    if not tik:
-        return "Ticket does not exist"
-    elif tik.quantity < quantity:
-        return "Not enough tickets for sale"
-    elif user.balance < (tik.price * quantity * 1.40):
-        return "Insufficient balance"
-    
-    #tickets can be bought
     user.balance = user.balance - (tik.price * quantity * 1.40)
     if tik.quantity == quantity:
         db.session.delete(tik)
@@ -124,3 +116,19 @@ def delete_database():
     User.query.delete()
     Ticket.query.delete()
     db.session.commit()
+
+def get_ticket(name):
+    """
+    Gets the first ticket in the database
+    :param name: the name of the ticket
+    :return: The ticket or none if no ticket exist 
+    """
+    return Ticket.query.filter_by(name=name).first()
+
+def get_balance(owner):
+    """
+    Gets the users current balance
+    :param owner: the email of the owner
+    :return: balance of the current user or none if owner doesn't exists
+    """
+    return User.query.filter_by(email=owner).first().balance

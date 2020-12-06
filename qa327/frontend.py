@@ -213,12 +213,22 @@ def buy_post():
     ticket_name = request.form.get('buy-name')
     ticket_quantity = int(request.form.get('buy-quantity'))
     error_message = None
-
+    tik = bn.get_ticket(ticket_name)
+    
     if (ticket_name_check(ticket_name) is None):  # no match in regex
         error_message = 'Ticket name is incorrect'
 
     elif quantity_check(ticket_quantity):
         error_message = "Invalid quantity in ticket buy form"
+
+    elif not tik:
+        return "Ticket does not exist"
+
+    elif tik.quantity < ticket_quantity:
+        return "Not enough tickets for sale"
+
+    elif bn.get_balance(user_email) < (tik.price * ticket_quantity * 1.40):
+        return "Insufficient balance"
 
     else:
         error_message = bn.buy_ticket(user_email, ticket_name, ticket_quantity)
