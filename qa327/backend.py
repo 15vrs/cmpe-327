@@ -99,7 +99,7 @@ def buy_ticket(email, name, quantity):
     :param quantity: the quantity of tickets being bought
     :return: an error message if there is any, or None if register succeeds
     """
-    user = User.query.filter_by(email=email).first().balance
+    user = User.query.filter_by(email=email).first()
     tik = Ticket.query.filter_by(name=name).first()
     user.balance = user.balance - (tik.price * quantity * 1.40)
     if tik.quantity == quantity:
