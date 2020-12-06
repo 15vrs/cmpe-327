@@ -25,6 +25,7 @@
 | Frontend | quantity_check()(quantity)                        | Verifies quantity of ticket is in range (0,100]                       |
 | Frontend | price_check(price)                                | Verifies price of ticket is in range [10,100]                         |
 | Frontend | date_check(expiry)                                | Verifies expiry date of ticket is in proper format and not expired    |
+| Frontend | form_button()                                     | Checks what button(sell/buy/update)is clicked and calls that function |
 | Backend  | get_user(email)                                   | Attempt to return user based on supplied email                        |
 | Backend  | login_user(email, password)                       | Attempt to authenticate user’s login                                  |
 | Backend  | register_user(email, name, password, password2)   | Attempt to register new user to the database                          |
@@ -33,6 +34,8 @@
 | Backend  | update_ticket(owner, name, quantity, price, date) | Attempt to update a ticket in the database                            |
 | Backend  | buy_ticket(email, name, quantity)                 | Attempt to buy a ticket in the database                               |
 | Backend  | delete_database()                                 | Deletes all data inside the User and Ticket databases                 |
+| Backend  | get_ticket(name)                                  | Attempt to get the first ticket in the database                       |
+| Backend  | get_balance(owner)                                | Attempt to get the balance of the owner                               |
 
 
 ## Test Plan
