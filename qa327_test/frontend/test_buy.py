@@ -31,7 +31,6 @@ test_user_unhashed = User(
 
 class SellTest(BaseCase):
 
-    @patch('qa327.backend.get_user', return_value=test_user)
     def _login(self, *_):
         # Navigate to /logout to invalidate any existing sessions
         self.open(base_url + '/logout')
@@ -42,6 +41,7 @@ class SellTest(BaseCase):
         self.type("#password", test_user_unhashed.password)
         self.click('input[type="submit"]')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_1a(self, *_):
         """
         The name of the ticket must be alphanumeric-only.
@@ -57,6 +57,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_1b(self, *_):
         """
         The name of the ticket is not allowed if the first character is a space.
@@ -72,6 +73,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_1c(self, *_):
         """
         The name of the ticket is not allowed if the last character is a space.
@@ -87,6 +89,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_2(self, *_):
         """
         The name of the ticket is no longer than 60 characters
@@ -102,6 +105,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_3a(self, *_):
         """
         Ticket quantity of 0 or less produces an error message.
@@ -117,6 +121,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
     
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_3b(self, *_):
         """
         Ticket quantity of over 100 produces an error message.
@@ -136,6 +141,7 @@ class SellTest(BaseCase):
     @patch('qa327.backend.get_balance', return_value=5000)
     @patch('qa327.backend.get_ticket', return_value=test_ticket)
     @patch('qa327.backend.buy_ticket', return_value=None)
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_4a(self, *_):
         """
         The ticket name exists in the database and the quantity available is more than the quantity requested to buy(positive).
@@ -151,6 +157,8 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_ticket', return_value=test_ticket)
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_4b(self, *_):
         """
         The ticket name exists in the database and the quantity avilable is less than the quantity requested to buy(negative).
@@ -165,6 +173,7 @@ class SellTest(BaseCase):
         # Navigate to /logout (clean up)
         self.open(base_url + '/logout')
 
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_4c(self, *_):
         """
         The ticket does not exists in the database and the quantity available is more than the quantity requested to buy(negative).
@@ -182,6 +191,7 @@ class SellTest(BaseCase):
     @patch('qa327.backend.get_balance', return_value=5000)
     @patch('qa327.backend.get_ticket', return_value=test_ticket)
     @patch('qa327.backend.buy_ticket', return_value=None)
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_5a(self, *_):
         """
         The user has more balance than the ticket price * quantity + service fee (35%) + tax (5%)(positive).
@@ -198,6 +208,7 @@ class SellTest(BaseCase):
 
     @patch('qa327.backend.get_balance', return_value=50)
     @patch('qa327.backend.get_ticket', return_value=test_ticket)
+    @patch('qa327.backend.get_user', return_value=test_user)
     def test_R6_5b(self, *_):
         """
         The user has less balance than the ticket price * quantity + service fee (35%) + tax (5%)(negative).
