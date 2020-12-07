@@ -92,17 +92,75 @@ class SellTest(BaseCase):
         self.assert_element_present("h4#message")
         self.assert_text("quantity format is incorrect", "h4#message")
 
+    # R4.3b Ticket quantity of over 100 produces an error message.
+    def test_R4_3b(self, *_):
+        self.login(self)
+        self.type("#sell-name", test_ticket.name)
+        self.type("#sell-quantity", 200)
+        self.type("#sell-price", test_ticket.price)
+        self.type("#sell-date", test_ticket.date)
+        self.click("input.sell")
+        self.assert_element_present("h4#message")
+        self.assert_text("quantity format is incorrect", "h4#message")
+
+    # R4.4a Price of less than 10 produces an error message.
+    def test_R4_4a(self, *_):
+        self.login(self)
+        self.type("#sell-name", test_ticket.name)
+        self.type("#sell-quantity", test_ticket.quantity)
+        self.type("#sell-price", 5)
+        self.type("#sell-date", test_ticket.date)
+        self.click("input.sell")
+        self.assert_element_present("h4#message")
+        self.assert_text("price format is incorrect", "h4#message")
+
+    # R4.4b Price of greater than 100 produces an error message.
+    def test_R4_4b(self, *_):
+        self.login(self)
+        self.type("#sell-name", test_ticket.name)
+        self.type("#sell-quantity", test_ticket.quantity)
+        self.type("#sell-price", 200)
+        self.type("#sell-date", test_ticket.date)
+        self.click("input.sell")
+        self.assert_element_present("h4#message")
+        self.assert_text("price format is incorrect", "h4#message")
+
+    # R4.5a Mis-formatted date produces error message.
+    def test_R4_5a(self, *_):
+        self.login(self)
+        self.type("#sell-name", test_ticket.name)
+        self.type("#sell-quantity", test_ticket.quantity)
+        self.type("#sell-price", test_ticket.price)
+        self.type("#sell-date", "2020-12-12")
+        self.click("input.sell")
+        self.assert_element_present("h4#message")
+        self.assert_text("date format is incorrect", "h4#message")
+
+    # R4.5b Date in the past produces error message.
+    def test_R4_5b(self, *_):
+        self.login(self)
+        self.type("#sell-name", test_ticket.name)
+        self.type("#sell-quantity", test_ticket.quantity)
+        self.type("#sell-price", test_ticket.price)
+        self.type("#sell-date", "20200101")
+        self.click("input.sell")
+        self.assert_element_present("h4#message")
+        self.assert_text("date format is incorrect", "h4#message")
+
     # R4.7 The added new ticket information will be posted on the user profile page.
+    @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.set_ticket', return_value=None)
+    @patch('qa327.backend.get_all_tickets', return_value=[test_ticket])
     def test_valid_ticket_sold(self, *_):
         self.login(self)
-        self.type("#sell-name", "test ticker!@#")
+        self.type("#sell-name", test_ticket.name)
         self.type("#sell-quantity", test_ticket.quantity)
         self.type("#sell-price", test_ticket.price)
         self.type("#sell-date", test_ticket.date)
         self.click("input.sell")
-        self.assert_element("#message")
         self.assert_element_not_visible("#message")
+        self.assert_element("#tickets")
+
 
 
 

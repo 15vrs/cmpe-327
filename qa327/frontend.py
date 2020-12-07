@@ -242,7 +242,7 @@ def sell_post():
     name = request.form.get('sell-name')
     quantity = int(request.form.get('sell-quantity'))
     price = int(request.form.get('sell-price'))
-    expiry = int(request.form.get('sell-date'))
+    expiry = (request.form.get('sell-date'))
     tickets = bn.get_all_tickets()
 
     if ticket_name_check(name) is None:  # no match in regex
@@ -287,10 +287,10 @@ def date_check(expiry):
     if expiry is not None:
         if len(str(expiry)) != 8:  # check if in proper format length
             return True
-        elif int(str(expiry)[4:6]) <= 0 or int(str(expiry)[4:6]) > 12:
+        elif int(str(expiry)[4:6]) <= 0 or int(str(expiry)[4:6]) > 12: # check month format
             return True
-        elif int(str(expiry)[6:8]) <= 0 or int(str(expiry)[6:8]) > 31:
+        elif int(str(expiry)[6:8]) <= 0 or int(str(expiry)[6:8]) > 31: # check day format
             return True
         else:
-            return expiry < int(date.today().strftime("%Y%m%d"))  # check if expiry is before today
+            return int(expiry) < int(date.today().strftime("%Y%m%d"))  # check if expiry is before today
     return True
