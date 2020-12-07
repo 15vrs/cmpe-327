@@ -17,7 +17,7 @@ test_user = User(
 test_ticket = Ticket(
     owner = 'test_frontend@test.com',
     name = 'test ticket',
-    quantity = 1,
+    quantity = "1",
     price = 20,
     date = 20210901
 )
@@ -85,7 +85,7 @@ class SellTest(BaseCase):
     def test_R4_3a(self, *_):
         self.login(self)
         self.type("#sell-name", test_ticket.name)
-        self.type("#sell-quantity", 0)
+        self.type("#sell-quantity", "0")
         self.type("#sell-price", test_ticket.price)
         self.type("#sell-date", test_ticket.date)
         self.click("input.sell")
@@ -96,7 +96,7 @@ class SellTest(BaseCase):
     def test_R4_3b(self, *_):
         self.login(self)
         self.type("#sell-name", test_ticket.name)
-        self.type("#sell-quantity", 200)
+        self.type("#sell-quantity", "200")
         self.type("#sell-price", test_ticket.price)
         self.type("#sell-date", test_ticket.date)
         self.click("input.sell")
@@ -151,7 +151,7 @@ class SellTest(BaseCase):
     @patch('qa327.backend.get_user', return_value=test_user)
     @patch('qa327.backend.set_ticket', return_value=None)
     @patch('qa327.backend.get_all_tickets', return_value=[test_ticket])
-    def test_valid_ticket_sold(self, *_):
+    def test_R4_7(self, *_):
         self.login(self)
         self.type("#sell-name", test_ticket.name)
         self.type("#sell-quantity", test_ticket.quantity)
