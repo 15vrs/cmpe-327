@@ -1,4 +1,4 @@
-import pytest, time
+import pytest
 from seleniumbase import BaseCase
 
 from qa327_test.conftest import base_url
@@ -54,26 +54,26 @@ class Integration(BaseCase):
 
     def test_register_login(self):
         """ This test checks the implemented login/logout feature """
+        bn.delete_database()
         self.register()
         self.login()
         self.open(base_url)
         self.assert_element_present("#welcome-header")
         self.assert_text("Hi " + test_user.name, "#welcome-header")
         # cleanup after test by removing registered user
-        bn.delete_database()
 
     def test_sell(self):
+        bn.delete_database()
         # register new user and login
         self.register()
         self.login()
         self.open(base_url)
         self.sell()
-        bn.delete_database()
 
     def test_buy(self):
         # register new user, login, and create ticket to buy
+        bn.delete_database()
         self.register()
-        time.sleep(3)
         self.login()
         self.open(base_url)
         self.sell()
@@ -85,4 +85,3 @@ class Integration(BaseCase):
         self.assert_text_not_visible(test_ticket.name, "#tickets")
         balance = bn.get_balance(test_user.email)
         self.assertLess(balance, test_user.balance, "error with buying ticket - balance did not change")
-        bn.delete_database()
