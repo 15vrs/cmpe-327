@@ -27,6 +27,9 @@ Unit Tests
 - [ ] test_sell.py
 - [ ] test_registration.py
 
+Integration:
+- [ ] test_integration.py
+
 ## Checklist:
 
 - [ ] Code follows the style guidelines of this project
