@@ -11,15 +11,15 @@ test_user = User(
     email='test_frontend@test.com',
     name='test_frontend',
     password='Password!',
-    balance=0
+    balance=5000
 )
 # Mock some sample tickets
 test_ticket = Ticket(
     owner = 'test_frontend@test.com',
     name = 'test ticket',
     quantity = "1",
-    price = 20,
-    date = 20210901
+    price = "20",
+    date = "20210901"
 )
 
 
@@ -108,7 +108,7 @@ class SellTest(BaseCase):
         self.login(self)
         self.type("#sell-name", test_ticket.name)
         self.type("#sell-quantity", test_ticket.quantity)
-        self.type("#sell-price", 5)
+        self.type("#sell-price", "5")
         self.type("#sell-date", test_ticket.date)
         self.click("input.sell")
         self.assert_element_present("h4#message")
@@ -119,7 +119,7 @@ class SellTest(BaseCase):
         self.login(self)
         self.type("#sell-name", test_ticket.name)
         self.type("#sell-quantity", test_ticket.quantity)
-        self.type("#sell-price", 200)
+        self.type("#sell-price", "200")
         self.type("#sell-date", test_ticket.date)
         self.click("input.sell")
         self.assert_element_present("h4#message")
