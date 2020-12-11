@@ -1,7 +1,7 @@
 version: "2"
 services:
   seetgeek-web:
-    image: 15vrs/group-28-seetgeek:v1
+    image: 15vrs/group-28-seetgeek:v4
     depends_on:
       - seetgeek-db
     links:
