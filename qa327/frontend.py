@@ -237,8 +237,7 @@ def buy_post():
 
 
 def sell_post():
-    email = request.form.get('user-email')
-    user = bn.get_user(email)
+    email  = session['logged_in']
     name = request.form.get('sell-name')
     quantity = int(request.form.get('sell-quantity'))
     price = int(request.form.get('sell-price'))
